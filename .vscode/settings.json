@@ -1,0 +1,25 @@
+{
+  "editor.rulers": [
+    100,
+    120
+  ],
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "always"
+  },
+  "editor.formatOnSave": true,
+  "eslint.run": "onSave",
+  "editor.insertSpaces": false,
+  "editor.tabSize": 2,
+  "editor.trimAutoWhitespace": false,
+  "files.insertFinalNewline": false,
+  "files.trimTrailingWhitespace": false
+}
