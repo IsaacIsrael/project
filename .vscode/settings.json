@@ -1,0 +1,25 @@
+{
+  "editor.rulers": [
+    80,
+    120
+  ],
+  "[javascript]": {
+    "editor.defaultFormatter": "vscode.configuration-editing"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "always"
+  },
+  "editor.formatOnSave": false,
+  "eslint.run": "onSave",
+  "editor.insertSpaces": false,
+  "editor.tabSize": 2,
+  "editor.trimAutoWhitespace": false,
+  "files.insertFinalNewline": false,
+  "files.trimTrailingWhitespace": false
+}
