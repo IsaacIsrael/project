@@ -1,9 +1,7 @@
-
 import React from 'react';
 import { ImageBackground, StyleSheet, Text, useColorScheme } from 'react-native';
 import Colors from '@styles/colors';
 import HermesBadge from '@components/HermesBadge';
-
 
 export default function Header(): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';

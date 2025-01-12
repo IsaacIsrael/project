@@ -7,7 +7,7 @@
       "@components/*": ["src/components/*"],
       "@services/*": ["src/services/*"],
       "@styles/*": ["src/styles/*"],
-      "@infra-types/*": ["src/types/Infrastructure/*"],
+      "@infra-types/*": ["src/types/Infrastructure/*"]
     }
   }
 }
