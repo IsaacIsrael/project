@@ -1,15 +1,13 @@
 import NativeSourceCode from '@services/NativeSourceCode';
 
-
 let _cachedDevServerURL: string | null;
 let _cachedFullBundleURL: string | null;
 const FALLBACK = 'http://localhost:8081/';
 
 type DevServerInfo = {
-  url: string,
-  fullBundleUrl?: string | null,
-  bundleLoadedFromServer: boolean,
-
+  url: string;
+  fullBundleUrl?: string | null;
+  bundleLoadedFromServer: boolean;
 };
 
 /**

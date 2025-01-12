@@ -3,13 +3,10 @@ import { StyleSheet, Text, useColorScheme, View } from 'react-native';
 import Colors from '@styles/colors';
 import { type HermesInternalType } from '@infra-types/Hermes';
 
-
 export default function HermesBadge(): React.JSX.Element | null {
   const isDarkMode = useColorScheme() === 'dark';
   const hermesInternal = HermesInternal as HermesInternalType;
-  const version =
-    hermesInternal?.getRuntimeProperties?.()['OSS Release Version'] ??
-    '';
+  const version = hermesInternal?.getRuntimeProperties?.()['OSS Release Version'] ?? '';
   return hermesInternal ? (
     <View style={styles.badge}>
       <Text

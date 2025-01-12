@@ -2,7 +2,6 @@ import React, { type PropsWithChildren } from 'react';
 import { StyleSheet, Text, useColorScheme, View } from 'react-native';
 import Colors from '@styles/colors';
 
-
 type Props = PropsWithChildren<{
   title: string;
 }>;

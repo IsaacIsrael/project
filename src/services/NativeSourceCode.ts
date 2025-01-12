@@ -1,8 +1,7 @@
 import { TurboModule, TurboModuleRegistry } from 'react-native';
 
-
 interface SourceCodeConstants {
-  scriptURL: string,
+  scriptURL: string;
 }
 
 interface Spec extends TurboModule {

@@ -3,7 +3,6 @@ import { StyleSheet, Text, TouchableOpacity, useColorScheme, View } from 'react-
 import openURLInBrowser from '@services/openURLInBrowser';
 import Colors from '@styles/colors';
 
-
 const links = [
   {
     id: 1,
@@ -15,8 +14,7 @@ const links = [
     id: 2,
     title: 'Style',
     link: 'https://reactnative.dev/docs/style',
-    description:
-      'Covers how to use the prop named style which controls the visuals.',
+    description: 'Covers how to use the prop named style which controls the visuals.',
   },
   {
     id: 3,
@@ -34,8 +32,7 @@ const links = [
     id: 5,
     title: 'Navigation',
     link: 'https://reactnative.dev/docs/navigation',
-    description:
-      'How to handle moving between screens inside your application.',
+    description: 'How to handle moving between screens inside your application.',
   },
   {
     id: 6,
@@ -47,22 +44,19 @@ const links = [
     id: 7,
     title: 'Debugging',
     link: 'https://facebook.github.io/react-native/docs/debugging',
-    description:
-      'Learn about the tools available to debug and inspect your app.',
+    description: 'Learn about the tools available to debug and inspect your app.',
   },
   {
     id: 8,
     title: 'Help',
     link: 'https://facebook.github.io/react-native/help',
-    description:
-      'Need more help? There are many other React Native developers who may have the answer.',
+    description: 'Need more help? There are many other React Native developers who may have the answer.',
   },
   {
     id: 9,
     title: 'Follow us',
     link: 'https://x.com/reactnative',
-    description:
-      'Stay in touch with the community, join in on Q&As and more by following React Native on X.',
+    description: 'Stay in touch with the community, join in on Q&As and more by following React Native on X.',
   },
 ];
 
