@@ -35,25 +35,6 @@ export default [
   reactRefresh.configs.recommended,
   {
     rules: {
-      'no-console': ['error', { allow: ['error'] }],
-      'arrow-body-style': 'warn',
-      '@typescript-eslint/no-shadow': ['error'],
-      '@typescript-eslint/explicit-function-return-type': ['error', { allowExpressions: true }],
-      '@typescript-eslint/no-unused-vars': [
-        'error',
-        {
-          argsIgnorePattern: '^_',
-          varsIgnorePattern: '^_',
-          caughtErrorsIgnorePattern: '^_',
-        },
-      ],
-      '@typescript-eslint/no-require-imports': [
-        'error',
-        {
-          allow: ['\\.png'],
-        },
-      ],
-
       '@typescript-eslint/naming-convention': [
         'warn',
         {
@@ -88,8 +69,33 @@ export default [
           format: ['PascalCase'],
         },
       ],
-      'filename-rules/match': [2, { '.ts': 'camelCase', '.tsx': 'PascalCase' }],
-
+      'filename-rules/match': ['error', { '.ts': 'camelCase', '.tsx': 'PascalCase' }],
+    },
+  },
+  {
+    rules: {
+      'no-console': ['error', { allow: ['error'] }],
+      'arrow-body-style': 'warn',
+      '@typescript-eslint/no-shadow': ['error'],
+      '@typescript-eslint/explicit-function-return-type': ['error', { allowExpressions: true }],
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        {
+          argsIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
+          caughtErrorsIgnorePattern: '^_',
+        },
+      ],
+      '@typescript-eslint/no-require-imports': [
+        'error',
+        {
+          allow: ['\\.png'],
+        },
+      ],
+    },
+  },
+  {
+    rules: {
       'react/jsx-filename-extension': ['error', { extensions: ['.tsx'] }],
       'react/prefer-stateless-function': 'error',
       'react/no-unused-prop-types': 'error',
