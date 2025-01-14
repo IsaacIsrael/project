@@ -36,6 +36,7 @@ export default [
   {
     rules: {
       'no-console': ['error', { allow: ['error'] }],
+      'arrow-body-style': 'warn',
       '@typescript-eslint/no-shadow': ['error'],
       '@typescript-eslint/explicit-function-return-type': ['error', { allowExpressions: true }],
       '@typescript-eslint/no-unused-vars': [
@@ -44,6 +45,12 @@ export default [
           argsIgnorePattern: '^_',
           varsIgnorePattern: '^_',
           caughtErrorsIgnorePattern: '^_',
+        },
+      ],
+      '@typescript-eslint/no-require-imports': [
+        'error',
+        {
+          allow: ['\\.png'],
         },
       ],
 
