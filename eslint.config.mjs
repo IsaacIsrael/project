@@ -32,7 +32,19 @@ export default [
   pluginReact.configs.flat.recommended,
   ...compat.extends('plugin:react-hooks/recommended'),
   {
-    rules: {},
+    rules: {
+      'no-console': ['error', { allow: ['error'] }],
+      '@typescript-eslint/no-shadow': ['error'],
+      '@typescript-eslint/explicit-function-return-type': ['error', { allowExpressions: true }],
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        {
+          argsIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
+          caughtErrorsIgnorePattern: '^_',
+        },
+      ],
+    },
   },
   // * This configuration should be in the end as mention here -
   // * https://github.com/prettier/eslint-config-prettier?tab=readme-ov-file#what-and-why
