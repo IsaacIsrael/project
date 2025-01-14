@@ -54,6 +54,42 @@ export default [
         },
       ],
 
+      '@typescript-eslint/naming-convention': [
+        'warn',
+        {
+          selector: 'default',
+          format: ['camelCase'],
+          leadingUnderscore: 'allow',
+        },
+        {
+          selector: 'variable',
+          // Specify PascalCase for React components
+          format: ['PascalCase', 'camelCase'],
+          leadingUnderscore: 'allow',
+        },
+        {
+          selector: 'import',
+          // Specify PascalCase for React components
+          format: ['PascalCase', 'camelCase'],
+          leadingUnderscore: 'allow',
+        },
+        {
+          selector: 'parameter',
+          format: ['camelCase'],
+          leadingUnderscore: 'allow',
+        },
+        {
+          selector: 'property',
+          format: null,
+          leadingUnderscore: 'allow',
+        },
+        {
+          selector: 'typeLike',
+          format: ['PascalCase'],
+        },
+      ],
+      'filename-rules/match': [2, { '.ts': 'camelCase', '.tsx': 'PascalCase' }],
+
       'react/jsx-filename-extension': ['error', { extensions: ['.tsx'] }],
       'react/prefer-stateless-function': 'error',
       'react/no-unused-prop-types': 'error',
