@@ -4,6 +4,7 @@ import pluginJs from '@eslint/js';
 import tseslint from 'typescript-eslint';
 import pluginReact from 'eslint-plugin-react';
 import eslintConfigPrettier from 'eslint-config-prettier';
+import reactRefresh from 'eslint-plugin-react-refresh';
 
 const compat = new FlatCompat();
 
@@ -31,6 +32,7 @@ export default [
   ...tseslint.configs.recommended,
   pluginReact.configs.flat.recommended,
   ...compat.extends('plugin:react-hooks/recommended'),
+  reactRefresh.configs.recommended,
   {
     rules: {
       'no-console': ['error', { allow: ['error'] }],
