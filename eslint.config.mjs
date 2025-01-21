@@ -33,6 +33,7 @@ export default [
   ...tseslint.configs.recommended,
   pluginReact.configs.flat.recommended,
   ...compat.extends('plugin:react-hooks/recommended'),
+  ...compat.extends('plugin:react-native/all'),
   reactRefresh.configs.recommended,
   {
     plugins: {
@@ -129,6 +130,8 @@ export default [
       'react/prefer-read-only-props': 'warn',
       'react/no-array-index-key': 'error',
       'react/no-multi-comp': 'error',
+      'react-native/sort-styles': 'off',
+      'react-native/no-raw-text': 'off',
     },
   },
   {
