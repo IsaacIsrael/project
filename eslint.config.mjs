@@ -126,6 +126,189 @@ export default [
       'react/no-multi-comp': 'error',
     },
   },
+  {
+    rules: {
+      'perfectionist/sort-imports': [
+        'error',
+        {
+          type: 'natural',
+          order: 'asc',
+          internalPattern: ['^(@|/)+'],
+          groups: [
+            ['external', 'builtin'],
+            ['parent', 'sibling', 'index'],
+            'internal',
+            'object',
+            ['type', 'internal-type', 'parent-type', 'sibling-type', 'index-type'],
+            'unknown',
+          ],
+        },
+      ],
+      'perfectionist/sort-array-includes': [
+        'error',
+        {
+          type: 'natural',
+        },
+      ],
+      'perfectionist/sort-classes': [
+        'error',
+        {
+          type: 'natural',
+          groups: [
+            'index-signature',
+            'static-block',
+
+            ['private-static-property', 'private-static-accessor-property'],
+            ['protected-static-property', 'protected-static-accessor-property'],
+            ['static-property', 'static-accessor-property'],
+
+            ['private-property', 'private-accessor-property'],
+            ['protected-property', 'protected-accessor-property'],
+            ['property', 'accessor-property'],
+
+            ['private-static-get-method', 'private-static-set-method'],
+            ['protected-static-get-method', 'protected-static-set-method'],
+            ['static-get-method', 'static-set-method'],
+
+            ['private-get-method', 'private-set-method'],
+            ['protected-get-method', 'protected-set-method'],
+            ['public-get-method', 'public-set-method'],
+
+            'constructor',
+
+            ['private-static-method', 'private-static-function-property'],
+            ['protected-static-method', 'protected-static-function-property'],
+            ['static-method', 'static-function-property'],
+
+            ['private-method', 'private-function-property'],
+            ['protected-method', 'protected-function-property'],
+            ['method', 'function-property'],
+
+            'unknown',
+          ],
+        },
+      ],
+      'perfectionist/sort-enums': [
+        'error',
+        {
+          type: 'natural',
+        },
+      ],
+      'perfectionist/sort-exports': [
+        'error',
+        {
+          type: 'natural',
+        },
+      ],
+      'perfectionist/sort-heritage-clauses': [
+        'error',
+        {
+          type: 'natural',
+        },
+      ],
+      'perfectionist/sort-interfaces': [
+        'error',
+        {
+          type: 'natural',
+        },
+      ],
+      'perfectionist/sort-intersection-types': [
+        'error',
+        {
+          type: 'natural',
+        },
+      ],
+      'perfectionist/sort-jsx-props': [
+        'error',
+        {
+          type: 'natural',
+          groups: ['multiline', 'unknown', 'shorthand', 'callback'],
+          customGroups: {
+            callback: '^on.+',
+          },
+        },
+      ],
+      'perfectionist/sort-maps': [
+        'error',
+        {
+          type: 'natural',
+        },
+      ],
+      'perfectionist/sort-modules': [
+        'error',
+        {
+          type: 'natural',
+          groups: [
+            'declare-enum',
+            'enum',
+            'export-enum',
+            ['declare-interface', 'declare-type'],
+            ['export-interface', 'export-type'],
+            ['interface', 'type'],
+            'declare-function',
+            'function',
+            'export-function',
+            'declare-class',
+            'class',
+            'export-class',
+          ],
+        },
+      ],
+      'perfectionist/sort-named-exports': [
+        'error',
+        {
+          type: 'natural',
+        },
+      ],
+      'perfectionist/sort-named-imports': [
+        'error',
+        {
+          type: 'natural',
+        },
+      ],
+      'perfectionist/sort-object-types': [
+        'error',
+        {
+          type: 'natural',
+        },
+      ],
+      'perfectionist/sort-objects': [
+        'error',
+        {
+          type: 'natural',
+          groups: ['id', 'unknown'],
+          customGroups: {
+            id: '^id$',
+          },
+          ignorePattern: ['style'],
+        },
+      ],
+      'perfectionist/sort-sets': [
+        'error',
+        {
+          type: 'natural',
+        },
+      ],
+      'perfectionist/sort-switch-case': [
+        'error',
+        {
+          type: 'natural',
+        },
+      ],
+      'perfectionist/sort-union-types': [
+        'error',
+        {
+          type: 'natural',
+        },
+      ],
+      'perfectionist/sort-variable-declarations': [
+        'error',
+        {
+          type: 'natural',
+        },
+      ],
+    },
+  },
   // * This configuration should be in the end as mention here -
   // * https://github.com/prettier/eslint-config-prettier?tab=readme-ov-file#what-and-why
   eslintConfigPrettier,
