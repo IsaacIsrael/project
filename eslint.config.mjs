@@ -5,6 +5,7 @@ import tseslint from 'typescript-eslint';
 import pluginReact from 'eslint-plugin-react';
 import eslintConfigPrettier from 'eslint-config-prettier';
 import reactRefresh from 'eslint-plugin-react-refresh';
+import perfectionist from 'eslint-plugin-perfectionist';
 
 const compat = new FlatCompat();
 
@@ -33,6 +34,11 @@ export default [
   pluginReact.configs.flat.recommended,
   ...compat.extends('plugin:react-hooks/recommended'),
   reactRefresh.configs.recommended,
+  {
+    plugins: {
+      perfectionist,
+    },
+  },
   {
     rules: {
       '@typescript-eslint/naming-convention': [
@@ -69,7 +75,6 @@ export default [
           format: ['PascalCase'],
         },
       ],
-      'filename-rules/match': ['error', { '.ts': 'camelCase', '.tsx': 'PascalCase' }],
     },
   },
   {
@@ -92,6 +97,7 @@ export default [
           allow: ['\\.png'],
         },
       ],
+      '@typescript-eslint/consistent-type-imports': 'error',
     },
   },
   {
@@ -119,7 +125,6 @@ export default [
       'react/jsx-curly-brace-presence': ['warn', { props: 'always', children: 'always' }],
       'react/display-name': 'warn',
       'react/self-closing-comp': 'warn',
-      'react/jsx-sort-props': 'warn',
       'react/react-in-jsx-scope': 'off',
       'react/prefer-read-only-props': 'warn',
       'react/no-array-index-key': 'error',
