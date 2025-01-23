@@ -1,9 +1,10 @@
 import React from 'react';
 import { StyleSheet, Text, useColorScheme, View } from 'react-native';
-import Colors from '@styles/colors';
-import { type HermesInternalType } from '@infra-types/Hermes';
 
-export default function HermesBadge(): React.JSX.Element | null {
+import { type HermesInternalType } from '@infra-types/Hermes';
+import Colors from '@styles/colors';
+
+const HermesBadge = (): null | React.JSX.Element => {
   const isDarkMode = useColorScheme() === 'dark';
   const hermesInternal = HermesInternal as HermesInternalType;
   const version = hermesInternal?.getRuntimeProperties?.()['OSS Release Version'] ?? '';
@@ -20,13 +21,13 @@ export default function HermesBadge(): React.JSX.Element | null {
       </Text>
     </View>
   ) : null;
-}
+};
 
 const styles = StyleSheet.create({
   badge: {
     position: 'absolute',
-    top: 8,
     right: 12,
+    top: 8,
   },
   badgeText: {
     fontSize: 14,
@@ -34,3 +35,5 @@ const styles = StyleSheet.create({
     textAlign: 'right',
   },
 });
+
+export default HermesBadge;

@@ -1,22 +1,23 @@
 import React from 'react';
 import { ImageBackground, StyleSheet, Text, useColorScheme } from 'react-native';
-import Colors from '@styles/colors';
-import HermesBadge from '@components/HermesBadge';
 
-export default function Header(): React.JSX.Element {
+import HermesBadge from '@components/HermesBadge';
+import Colors from '@styles/colors';
+
+const Header = (): React.JSX.Element => {
   const isDarkMode = useColorScheme() === 'dark';
   return (
     <ImageBackground
-      accessibilityRole="image"
-      testID="new-app-screen-header"
-      source={require('../assets/images/logo.png')}
       style={[
         styles.background,
         {
           backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
         },
       ]}
-      imageStyle={styles.logo}>
+      accessibilityRole={'image'}
+      imageStyle={styles.logo}
+      source={require('../assets/images/logo.png')}
+      testID={'new-app-screen-header'}>
       <HermesBadge />
       <Text
         style={[
@@ -25,24 +26,22 @@ export default function Header(): React.JSX.Element {
             color: isDarkMode ? Colors.white : Colors.black,
           },
         ]}>
-        Welcome to
+        {'Welcome to'}
         {'\n'}
-        React Native
+        {'React Native'}
       </Text>
     </ImageBackground>
   );
-}
+};
 
 const styles = StyleSheet.create({
   background: {
     paddingBottom: 40,
-    paddingTop: 96,
     paddingHorizontal: 32,
+    paddingTop: 96,
   },
   logo: {
-    opacity: 0.2,
-    overflow: 'visible',
-    resizeMode: 'cover',
+    marginBottom: -192,
     /*
      * These negative margins allow the image to be offset similarly across screen sizes and component sizes.
      *
@@ -50,7 +49,9 @@ const styles = StyleSheet.create({
      * source image's size.
      */
     marginLeft: -128,
-    marginBottom: -192,
+    opacity: 0.2,
+    overflow: 'visible',
+    resizeMode: 'cover',
   },
   text: {
     fontSize: 40,
@@ -58,3 +59,5 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 });
+
+export default Header;

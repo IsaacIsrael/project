@@ -1,13 +1,13 @@
 import NativeSourceCode from '@services/NativeSourceCode';
 
-let _cachedDevServerURL: string | null;
-let _cachedFullBundleURL: string | null;
+let _cachedDevServerURL: null | string;
+let _cachedFullBundleURL: null | string;
 const FALLBACK = 'http://localhost:8081/';
 
 type DevServerInfo = {
-  url: string;
-  fullBundleUrl?: string | null;
   bundleLoadedFromServer: boolean;
+  fullBundleUrl?: null | string;
+  url: string;
 };
 
 /**
@@ -23,8 +23,8 @@ export default function getDevServer(): DevServerInfo {
   }
 
   return {
-    url: _cachedDevServerURL ?? FALLBACK,
-    fullBundleUrl: _cachedFullBundleURL,
     bundleLoadedFromServer: _cachedDevServerURL !== null,
+    fullBundleUrl: _cachedFullBundleURL,
+    url: _cachedDevServerURL ?? FALLBACK,
   };
 }
