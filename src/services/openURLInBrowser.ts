@@ -1,8 +1,8 @@
 import getDevServer from '@services/getDevServer';
 
-export default function openURLInBrowser(url: string) {
+export default function openURLInBrowser(url: string): void {
   fetch(getDevServer().url + 'open-url', {
-    method: 'POST',
     body: JSON.stringify({ url }),
+    method: 'POST',
   });
 }

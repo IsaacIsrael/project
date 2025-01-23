@@ -6,8 +6,8 @@ export interface HermesInternalType {
    * @return An object that maps strings to various types of runtime properties.
    */
   getRuntimeProperties?: () => {
-    'OSS Release Version': string;
     Build: string;
+    'OSS Release Version': string;
     [string]: mixed;
   };
 }

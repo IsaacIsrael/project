@@ -1,12 +1,13 @@
 import React, { type PropsWithChildren } from 'react';
 import { StyleSheet, Text, useColorScheme, View } from 'react-native';
+
 import Colors from '@styles/colors';
 
 type Props = PropsWithChildren<{
-  title: string;
+  readonly title: string;
 }>;
 
-export default function Section({ children, title }: Props): React.JSX.Element {
+const Section = ({ children, title }: Props): React.JSX.Element => {
   const isDarkMode = useColorScheme() === 'dark';
   return (
     <View style={styles.sectionContainer}>
@@ -30,7 +31,7 @@ export default function Section({ children, title }: Props): React.JSX.Element {
       </Text>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   sectionContainer: {
@@ -42,8 +43,10 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   sectionDescription: {
-    marginTop: 8,
     fontSize: 18,
     fontWeight: '400',
+    marginTop: 8,
   },
 });
+
+export default Section;

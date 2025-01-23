@@ -1,4 +1,6 @@
-import { TurboModule, TurboModuleRegistry } from 'react-native';
+import { TurboModuleRegistry } from 'react-native';
+
+import type { TurboModule } from 'react-native';
 
 interface SourceCodeConstants {
   scriptURL: string;
@@ -9,7 +11,7 @@ interface Spec extends TurboModule {
 }
 
 const NativeModule = TurboModuleRegistry.getEnforcing<Spec>('SourceCode');
-let constants: SourceCodeConstants | null = null;
+let constants: null | SourceCodeConstants = null;
 
 const NativeSourceCode = {
   getConstants(): SourceCodeConstants {
