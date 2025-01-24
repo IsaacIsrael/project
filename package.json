@@ -11,7 +11,8 @@
     "eslint:check": "eslint .",
     "eslint:fix": "eslint . --fix",
     "start": "react-native start",
-    "test": "jest"
+    "test": "jest",
+    "prepare": "husky"
   },
   "dependencies": {
     "react": "18.3.1",
