@@ -35,8 +35,11 @@
     "@types/react-test-renderer": "^18.0.0",
     "babel-jest": "^29.6.3",
     "babel-plugin-module-resolver": "^5.0.2",
+    "commitizen": "^4.3.1",
     "commitlint": "^19.6.1",
     "commitlint-config-gitmoji": "^2.3.1",
+    "cz-conventional-changelog": "^3.3.0",
+    "cz-emoji-conventional": "^1.1.0",
     "eslint": "^8.57.1",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-perfectionist": "^4.6.0",
@@ -53,5 +56,10 @@
   },
   "engines": {
     "node": ">=18"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-emoji-conventional"
+    }
   }
 }
