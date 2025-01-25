@@ -59,10 +59,5 @@
   },
   "engines": {
     "node": ">=18"
-  },
-  "config": {
-    "commitizen": {
-      "path": "cz-conventional-changelog"
-    }
   }
 }
