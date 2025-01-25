@@ -1,3 +1,3 @@
 export default {
-  '*': 'prettier --list-different',
+  '*': ['prettier --list-different', 'eslint'],
 };
