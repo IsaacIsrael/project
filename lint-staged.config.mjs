@@ -1,3 +1,3 @@
 export default {
-  '*': "echo 'lint-staged'",
+  '*': 'prettier --list-different',
 };
