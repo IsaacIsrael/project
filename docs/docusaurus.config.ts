@@ -83,9 +83,15 @@ const config: Config = {
       items: [
         {
           type: 'docSidebar',
+          sidebarId: 'apiSidebar',
+          position: 'left',
+          label: 'Documentation',
+        },
+        {
+          type: 'docSidebar',
           sidebarId: 'tutorialSidebar',
           position: 'left',
-          label: 'Tutorial',
+          label: 'Docusaurus Tutorial',
         },
         { to: '/blog', label: 'Blog', position: 'left' },
         {
