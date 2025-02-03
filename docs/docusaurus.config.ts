@@ -31,17 +31,7 @@ const config: Config = {
     locales: ['en'],
   },
 
-  plugins: [
-    [
-      'docusaurus-plugin-typedoc',
-
-      // Options
-      {
-        entryPoints: ['../src/App.tsx'],
-        tsconfig: '../tsconfig.json',
-      },
-    ],
-  ],
+  plugins: ['docusaurus-plugin-typedoc'],
 
   presets: [
     [
