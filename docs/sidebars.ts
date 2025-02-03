@@ -16,6 +16,11 @@ import type { SidebarsConfig } from '@docusaurus/plugin-content-docs';
 const sidebars: SidebarsConfig = {
   apiSidebar: [
     {
+      id: 'api/getting-start',
+      label: 'Getting Start',
+      type: 'doc',
+    },
+    {
       items: typedocSidebar,
       label: 'Documentation',
       link: {
