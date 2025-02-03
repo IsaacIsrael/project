@@ -35,7 +35,7 @@ const config: Config = {
     [
       'docusaurus-plugin-typedoc',
       {
-        plugin: ['typedoc-plugin-rename-defaults'],
+        plugin: ['./plugins/copy-README-plugin.js', 'typedoc-plugin-rename-defaults'],
       },
     ],
   ],
