@@ -1,9 +1,9 @@
 # NativeSourceCode
 
-## default
+## NativeSourceCode
 
 ```ts
-const default: object;
+const NativeSourceCode: object;
 ```
 
 ### Type declaration

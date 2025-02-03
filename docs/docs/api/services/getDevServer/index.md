@@ -1,9 +1,9 @@
 # getDevServer
 
-## default()
+## getDevServer()
 
 ```ts
-function default(): DevServerInfo
+function getDevServer(): DevServerInfo
 ```
 
 Many RN development tools rely on the development server (packager) running

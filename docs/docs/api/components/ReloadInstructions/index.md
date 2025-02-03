@@ -1,9 +1,9 @@
 # ReloadInstructions
 
-## default()
+## ReloadInstructions()
 
 ```ts
-function default(): Element
+function ReloadInstructions(): Element
 ```
 
 ### Returns

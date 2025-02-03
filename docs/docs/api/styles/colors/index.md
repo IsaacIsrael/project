@@ -1,9 +1,9 @@
 # colors
 
-## default
+## colors
 
 ```ts
-default: object;
+colors: object;
 ```
 
 ### Type declaration

@@ -1,9 +1,9 @@
 # HermesBadge
 
-## default()
+## HermesBadge()
 
 ```ts
-function default(): null | Element
+function HermesBadge(): null | Element
 ```
 
 ### Returns

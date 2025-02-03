@@ -1,9 +1,9 @@
 # Sections
 
-## default()
+## Section()
 
 ```ts
-function default(__namedParameters): Element
+function Section(__namedParameters): Element
 ```
 
 ### Parameters

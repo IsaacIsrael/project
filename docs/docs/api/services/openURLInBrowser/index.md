@@ -1,9 +1,9 @@
 # openURLInBrowser
 
-## default()
+## openURLInBrowser()
 
 ```ts
-function default(url): void
+function openURLInBrowser(url): void
 ```
 
 ### Parameters

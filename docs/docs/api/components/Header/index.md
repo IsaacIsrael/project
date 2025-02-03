@@ -1,9 +1,9 @@
 # Header
 
-## default()
+## Header()
 
 ```ts
-function default(): Element
+function Header(): Element
 ```
 
 ### Returns

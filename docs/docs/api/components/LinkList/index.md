@@ -1,9 +1,9 @@
 # LinkList
 
-## default()
+## LinkList()
 
 ```ts
-function default(): Element
+function LinkList(): Element
 ```
 
 ### Returns

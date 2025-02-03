@@ -31,7 +31,14 @@ const config: Config = {
     locales: ['en'],
   },
 
-  plugins: ['docusaurus-plugin-typedoc'],
+  plugins: [
+    [
+      'docusaurus-plugin-typedoc',
+      {
+        plugin: ['typedoc-plugin-rename-defaults'],
+      },
+    ],
+  ],
 
   presets: [
     [

@@ -1,9 +1,9 @@
 # DebugInstructions
 
-## default()
+## DebugInstructions()
 
 ```ts
-function default(): Element
+function DebugInstructions(): Element
 ```
 
 ### Returns

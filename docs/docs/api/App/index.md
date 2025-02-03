@@ -1,9 +1,9 @@
 # App
 
-## default()
+## App()
 
 ```ts
-function default(): Element
+function App(): Element
 ```
 
 ### Returns
