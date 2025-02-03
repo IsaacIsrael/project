@@ -15,7 +15,7 @@ export default [
     files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'],
   },
   {
-    ignores: ['**/*.config.*', '**/.docusaurus'],
+    ignores: ['**/*.config.*', '**/.docusaurus', 'docs/docs/api/**'],
   },
   {
     languageOptions: {
