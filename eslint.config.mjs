@@ -15,7 +15,7 @@ export default [
     files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'],
   },
   {
-    ignores: ['*.config.*'],
+    ignores: ['**/*.config.*', '**/.docusaurus', 'docs/docs/api/**'],
   },
   {
     languageOptions: {
@@ -63,7 +63,7 @@ export default [
         },
         {
           selector: 'parameter',
-          format: ['camelCase'],
+          format: ['PascalCase', 'camelCase'],
           leadingUnderscore: 'allow',
         },
         {
@@ -95,7 +95,7 @@ export default [
       '@typescript-eslint/no-require-imports': [
         'error',
         {
-          allow: ['\\.png'],
+          allow: ['\\.png', '\\.svg'],
         },
       ],
       '@typescript-eslint/consistent-type-imports': 'error',
@@ -132,6 +132,7 @@ export default [
       'react/no-multi-comp': 'error',
       'react-native/sort-styles': 'off',
       'react-native/no-raw-text': 'off',
+      'react/prop-types': 'off',
     },
   },
   {
@@ -230,8 +231,9 @@ export default [
         'error',
         {
           type: 'natural',
-          groups: ['multiline', 'unknown', 'shorthand', 'callback'],
+          groups: ['id', 'multiline', 'unknown', 'shorthand', 'callback'],
           customGroups: {
+            id: '^id$',
             callback: '^on.+',
           },
         },
@@ -278,6 +280,10 @@ export default [
         'error',
         {
           type: 'natural',
+          groups: ['id', 'unknown'],
+          customGroups: {
+            id: '^id$',
+          },
         },
       ],
       'perfectionist/sort-objects': [
