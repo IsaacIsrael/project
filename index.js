@@ -1,7 +1,8 @@
+/* eslint-disable no-undef */
 import { AppRegistry } from 'react-native';
 
-// import App from './src/App';
-import StorybookUIRoot from './.storybook.ondevice';
 import { name as appName } from './app.json';
 
-AppRegistry.registerComponent(appName, () => StorybookUIRoot);
+import EnvironmentManager from '@managers/EnvironmentManager';
+
+AppRegistry.registerComponent(appName, () => EnvironmentManager.App);
