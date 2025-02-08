@@ -15,8 +15,8 @@
     "test": "jest",
     "prepare": "husky",
     "update": "npx npm-check-updates -i",
-    "storybook:device": "react-native start --config ./metro.storybook.config.js",
-    "storybook-generate": "sb-rn-get-stories --config-path .storybook.ondevice"
+    "storybook:device": "STORYBOOK=true npm start",
+    "storybook:device:generate": "sb-rn-get-stories --config-path .storybook.ondevice"
   },
   "dependencies": {
     "react": "18.3.1",
