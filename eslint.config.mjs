@@ -15,7 +15,7 @@ export default [
     files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'],
   },
   {
-    ignores: ['**/*.config.*', '**/.docusaurus', 'docs/docs/api/**'],
+    ignores: ['**/*.config.*', '**/.docusaurus', 'docs/docs/api/**', '.storybook.ondevice/storybook.requires.ts'],
   },
   {
     languageOptions: {

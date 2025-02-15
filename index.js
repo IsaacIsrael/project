@@ -1,6 +1,8 @@
+/* eslint-disable no-undef */
 import { AppRegistry } from 'react-native';
 
 import { name as appName } from './app.json';
-import App from './src/App';
 
-AppRegistry.registerComponent(appName, () => App);
+import EnvironmentManager from '@managers/EnvironmentManager';
+
+AppRegistry.registerComponent(appName, () => EnvironmentManager.App);

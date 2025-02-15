@@ -1,6 +1,7 @@
 module.exports = {
   presets: ['module:@react-native/babel-preset'],
   plugins: [
+    'transform-inline-environment-variables',
     [
       'module-resolver',
       {
@@ -9,11 +10,14 @@ module.exports = {
         alias: {
           tests: ['./tests/'],
           '@components': './src/components',
+          '@constants': './src/constants',
+          '@managers': './src/helpers/managers',
           '@services': './src/services',
           '@styles': './src/styles',
           '@infra-types': './src/types/Infrastructure',
         },
       },
     ],
+    'react-native-reanimated/plugin',
   ],
 };
