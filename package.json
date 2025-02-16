@@ -15,6 +15,8 @@
     "test": "jest",
     "prepare": "husky",
     "update": "npx npm-check-updates -i",
+    "docs": "npm start --prefix ./docs",
+    "docs:install": "npm install --prefix ./docs",
     "storybook": "concurrently -n web,mobile -c magentaBright,greenBright -k \"npm run storybook:web\" \"npm run storybook:device\"",
     "storybook:device": "STORYBOOK=true npm start",
     "storybook:device:generate": "sb-rn-get-stories --config-path .storybook.ondevice",
