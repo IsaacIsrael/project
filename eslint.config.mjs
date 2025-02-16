@@ -132,7 +132,6 @@ export default [
       'react/no-multi-comp': 'error',
       'react-native/sort-styles': 'off',
       'react-native/no-raw-text': 'off',
-      'react/prop-types': 'off',
     },
   },
   {
