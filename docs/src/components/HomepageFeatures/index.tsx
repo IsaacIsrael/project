@@ -44,7 +44,7 @@ const HomepageFeatures: React.FC = () => (
   <section className={styles.features}>
     <div className={'container'}>
       <div className={'row'}>
-        {FeatureList.map((props) => (
+        {FeatureList.map((props: FeatureProps) => (
           <Feature key={props.id} {...props} />
         ))}
       </div>
