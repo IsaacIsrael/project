@@ -1,5 +1,6 @@
 export default {
   entryPoints: ['../src'],
+  excludeNotDocumented: true,
   tsconfig: '../tsconfig.json',
   entryPointStrategy: 'expand',
   readme: 'none',
