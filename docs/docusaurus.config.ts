@@ -88,6 +88,11 @@ const config: Config = {
           label: 'Docusaurus Tutorial',
         },
         {
+          to: '/storybook',
+          position: 'left',
+          label: 'Storybook',
+        },
+        {
           href: 'https://github.com/IsaacIsrael/project',
           label: 'GitHub',
           position: 'right',
