@@ -35,7 +35,7 @@ const config: Config = {
     [
       'docusaurus-plugin-typedoc',
       {
-        plugin: ['./plugins/copy-README-plugin.js', 'typedoc-plugin-rename-defaults'],
+        plugin: ['./plugins/copy-README-plugin.js', './plugins/storybook-builder.js', 'typedoc-plugin-rename-defaults'],
       },
     ],
   ],
@@ -86,6 +86,11 @@ const config: Config = {
           sidebarId: 'tutorialSidebar',
           position: 'left',
           label: 'Docusaurus Tutorial',
+        },
+        {
+          to: '/storybook',
+          position: 'left',
+          label: 'Storybook',
         },
         {
           href: 'https://github.com/IsaacIsrael/project',
