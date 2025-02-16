@@ -5,7 +5,7 @@ import StorybookUIRoot from '../../../.storybook.ondevice';
 import EnvironmentConstant from '@constants/EnvironmentConstant';
 
 class EnvironmentManager {
-  static get App(): React.FC {
+  static get app(): React.FC {
     switch (true) {
       case !EnvironmentConstant.isLocal:
         return App;
