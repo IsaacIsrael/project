@@ -85,3 +85,4 @@ yarn-error.log*
 docs/build
 .docusaurus
 .cache-loader
+docs/static/storybook-static

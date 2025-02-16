@@ -21,7 +21,7 @@
     "storybook:device": "STORYBOOK=true npm start",
     "storybook:device:generate": "sb-rn-get-stories --config-path .storybook.ondevice",
     "storybook:web": "storybook dev -p 6006",
-    "storybook:web:build": "storybook build -o docs/static/storybook"
+    "storybook:web:build": "storybook build -o docs/static/storybook-static"
   },
   "dependencies": {
     "react": "18.3.1",
