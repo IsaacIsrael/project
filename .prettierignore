@@ -1,6 +1,0 @@
-## Native folders
-ios
-android
-docs/docs/api
-docs/static/storybook
-.storybook.ondevice/storybook.requires.ts
