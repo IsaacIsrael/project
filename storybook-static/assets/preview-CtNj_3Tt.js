@@ -1,396 +1,429 @@
-import{d as $}from"./index-DrFu-skq.js";const{useMemo:x,useEffect:f}=__STORYBOOK_MODULE_PREVIEW_API__,{global:p}=__STORYBOOK_MODULE_GLOBAL__;var m="outline",u=i=>{(Array.isArray(i)?i:[i]).forEach(r)},r=i=>{let t=typeof i=="string"?i:i.join(""),o=p.document.getElementById(t);o&&o.parentElement&&o.parentElement.removeChild(o)},b=(i,t)=>{let o=p.document.getElementById(i);if(o)o.innerHTML!==t&&(o.innerHTML=t);else{let n=p.document.createElement("style");n.setAttribute("id",i),n.innerHTML=t,p.document.head.appendChild(n)}};function s(i){return $`
-    ${i} body {
+import { d as dedent } from "./index-BdOSk9or.js";
+const { useMemo, useEffect } = __STORYBOOK_MODULE_PREVIEW_API__;
+const { global } = __STORYBOOK_MODULE_GLOBAL__;
+var PARAM_KEY = "outline";
+var clearStyles = (selector) => {
+  (Array.isArray(selector) ? selector : [selector]).forEach(clearStyle);
+}, clearStyle = (input) => {
+  let selector = typeof input == "string" ? input : input.join(""), element = global.document.getElementById(selector);
+  element && element.parentElement && element.parentElement.removeChild(element);
+}, addOutlineStyles = (selector, css) => {
+  let existingStyle = global.document.getElementById(selector);
+  if (existingStyle) existingStyle.innerHTML !== css && (existingStyle.innerHTML = css);
+  else {
+    let style = global.document.createElement("style");
+    style.setAttribute("id", selector), style.innerHTML = css, global.document.head.appendChild(style);
+  }
+};
+function outlineCSS(selector) {
+  return dedent`
+    ${selector} body {
       outline: 1px solid #2980b9 !important;
     }
 
-    ${i} article {
+    ${selector} article {
       outline: 1px solid #3498db !important;
     }
 
-    ${i} nav {
+    ${selector} nav {
       outline: 1px solid #0088c3 !important;
     }
 
-    ${i} aside {
+    ${selector} aside {
       outline: 1px solid #33a0ce !important;
     }
 
-    ${i} section {
+    ${selector} section {
       outline: 1px solid #66b8da !important;
     }
 
-    ${i} header {
+    ${selector} header {
       outline: 1px solid #99cfe7 !important;
     }
 
-    ${i} footer {
+    ${selector} footer {
       outline: 1px solid #cce7f3 !important;
     }
 
-    ${i} h1 {
+    ${selector} h1 {
       outline: 1px solid #162544 !important;
     }
 
-    ${i} h2 {
+    ${selector} h2 {
       outline: 1px solid #314e6e !important;
     }
 
-    ${i} h3 {
+    ${selector} h3 {
       outline: 1px solid #3e5e85 !important;
     }
 
-    ${i} h4 {
+    ${selector} h4 {
       outline: 1px solid #449baf !important;
     }
 
-    ${i} h5 {
+    ${selector} h5 {
       outline: 1px solid #c7d1cb !important;
     }
 
-    ${i} h6 {
+    ${selector} h6 {
       outline: 1px solid #4371d0 !important;
     }
 
-    ${i} main {
+    ${selector} main {
       outline: 1px solid #2f4f90 !important;
     }
 
-    ${i} address {
+    ${selector} address {
       outline: 1px solid #1a2c51 !important;
     }
 
-    ${i} div {
+    ${selector} div {
       outline: 1px solid #036cdb !important;
     }
 
-    ${i} p {
+    ${selector} p {
       outline: 1px solid #ac050b !important;
     }
 
-    ${i} hr {
+    ${selector} hr {
       outline: 1px solid #ff063f !important;
     }
 
-    ${i} pre {
+    ${selector} pre {
       outline: 1px solid #850440 !important;
     }
 
-    ${i} blockquote {
+    ${selector} blockquote {
       outline: 1px solid #f1b8e7 !important;
     }
 
-    ${i} ol {
+    ${selector} ol {
       outline: 1px solid #ff050c !important;
     }
 
-    ${i} ul {
+    ${selector} ul {
       outline: 1px solid #d90416 !important;
     }
 
-    ${i} li {
+    ${selector} li {
       outline: 1px solid #d90416 !important;
     }
 
-    ${i} dl {
+    ${selector} dl {
       outline: 1px solid #fd3427 !important;
     }
 
-    ${i} dt {
+    ${selector} dt {
       outline: 1px solid #ff0043 !important;
     }
 
-    ${i} dd {
+    ${selector} dd {
       outline: 1px solid #e80174 !important;
     }
 
-    ${i} figure {
+    ${selector} figure {
       outline: 1px solid #ff00bb !important;
     }
 
-    ${i} figcaption {
+    ${selector} figcaption {
       outline: 1px solid #bf0032 !important;
     }
 
-    ${i} table {
+    ${selector} table {
       outline: 1px solid #00cc99 !important;
     }
 
-    ${i} caption {
+    ${selector} caption {
       outline: 1px solid #37ffc4 !important;
     }
 
-    ${i} thead {
+    ${selector} thead {
       outline: 1px solid #98daca !important;
     }
 
-    ${i} tbody {
+    ${selector} tbody {
       outline: 1px solid #64a7a0 !important;
     }
 
-    ${i} tfoot {
+    ${selector} tfoot {
       outline: 1px solid #22746b !important;
     }
 
-    ${i} tr {
+    ${selector} tr {
       outline: 1px solid #86c0b2 !important;
     }
 
-    ${i} th {
+    ${selector} th {
       outline: 1px solid #a1e7d6 !important;
     }
 
-    ${i} td {
+    ${selector} td {
       outline: 1px solid #3f5a54 !important;
     }
 
-    ${i} col {
+    ${selector} col {
       outline: 1px solid #6c9a8f !important;
     }
 
-    ${i} colgroup {
+    ${selector} colgroup {
       outline: 1px solid #6c9a9d !important;
     }
 
-    ${i} button {
+    ${selector} button {
       outline: 1px solid #da8301 !important;
     }
 
-    ${i} datalist {
+    ${selector} datalist {
       outline: 1px solid #c06000 !important;
     }
 
-    ${i} fieldset {
+    ${selector} fieldset {
       outline: 1px solid #d95100 !important;
     }
 
-    ${i} form {
+    ${selector} form {
       outline: 1px solid #d23600 !important;
     }
 
-    ${i} input {
+    ${selector} input {
       outline: 1px solid #fca600 !important;
     }
 
-    ${i} keygen {
+    ${selector} keygen {
       outline: 1px solid #b31e00 !important;
     }
 
-    ${i} label {
+    ${selector} label {
       outline: 1px solid #ee8900 !important;
     }
 
-    ${i} legend {
+    ${selector} legend {
       outline: 1px solid #de6d00 !important;
     }
 
-    ${i} meter {
+    ${selector} meter {
       outline: 1px solid #e8630c !important;
     }
 
-    ${i} optgroup {
+    ${selector} optgroup {
       outline: 1px solid #b33600 !important;
     }
 
-    ${i} option {
+    ${selector} option {
       outline: 1px solid #ff8a00 !important;
     }
 
-    ${i} output {
+    ${selector} output {
       outline: 1px solid #ff9619 !important;
     }
 
-    ${i} progress {
+    ${selector} progress {
       outline: 1px solid #e57c00 !important;
     }
 
-    ${i} select {
+    ${selector} select {
       outline: 1px solid #e26e0f !important;
     }
 
-    ${i} textarea {
+    ${selector} textarea {
       outline: 1px solid #cc5400 !important;
     }
 
-    ${i} details {
+    ${selector} details {
       outline: 1px solid #33848f !important;
     }
 
-    ${i} summary {
+    ${selector} summary {
       outline: 1px solid #60a1a6 !important;
     }
 
-    ${i} command {
+    ${selector} command {
       outline: 1px solid #438da1 !important;
     }
 
-    ${i} menu {
+    ${selector} menu {
       outline: 1px solid #449da6 !important;
     }
 
-    ${i} del {
+    ${selector} del {
       outline: 1px solid #bf0000 !important;
     }
 
-    ${i} ins {
+    ${selector} ins {
       outline: 1px solid #400000 !important;
     }
 
-    ${i} img {
+    ${selector} img {
       outline: 1px solid #22746b !important;
     }
 
-    ${i} iframe {
+    ${selector} iframe {
       outline: 1px solid #64a7a0 !important;
     }
 
-    ${i} embed {
+    ${selector} embed {
       outline: 1px solid #98daca !important;
     }
 
-    ${i} object {
+    ${selector} object {
       outline: 1px solid #00cc99 !important;
     }
 
-    ${i} param {
+    ${selector} param {
       outline: 1px solid #37ffc4 !important;
     }
 
-    ${i} video {
+    ${selector} video {
       outline: 1px solid #6ee866 !important;
     }
 
-    ${i} audio {
+    ${selector} audio {
       outline: 1px solid #027353 !important;
     }
 
-    ${i} source {
+    ${selector} source {
       outline: 1px solid #012426 !important;
     }
 
-    ${i} canvas {
+    ${selector} canvas {
       outline: 1px solid #a2f570 !important;
     }
 
-    ${i} track {
+    ${selector} track {
       outline: 1px solid #59a600 !important;
     }
 
-    ${i} map {
+    ${selector} map {
       outline: 1px solid #7be500 !important;
     }
 
-    ${i} area {
+    ${selector} area {
       outline: 1px solid #305900 !important;
     }
 
-    ${i} a {
+    ${selector} a {
       outline: 1px solid #ff62ab !important;
     }
 
-    ${i} em {
+    ${selector} em {
       outline: 1px solid #800b41 !important;
     }
 
-    ${i} strong {
+    ${selector} strong {
       outline: 1px solid #ff1583 !important;
     }
 
-    ${i} i {
+    ${selector} i {
       outline: 1px solid #803156 !important;
     }
 
-    ${i} b {
+    ${selector} b {
       outline: 1px solid #cc1169 !important;
     }
 
-    ${i} u {
+    ${selector} u {
       outline: 1px solid #ff0430 !important;
     }
 
-    ${i} s {
+    ${selector} s {
       outline: 1px solid #f805e3 !important;
     }
 
-    ${i} small {
+    ${selector} small {
       outline: 1px solid #d107b2 !important;
     }
 
-    ${i} abbr {
+    ${selector} abbr {
       outline: 1px solid #4a0263 !important;
     }
 
-    ${i} q {
+    ${selector} q {
       outline: 1px solid #240018 !important;
     }
 
-    ${i} cite {
+    ${selector} cite {
       outline: 1px solid #64003c !important;
     }
 
-    ${i} dfn {
+    ${selector} dfn {
       outline: 1px solid #b4005a !important;
     }
 
-    ${i} sub {
+    ${selector} sub {
       outline: 1px solid #dba0c8 !important;
     }
 
-    ${i} sup {
+    ${selector} sup {
       outline: 1px solid #cc0256 !important;
     }
 
-    ${i} time {
+    ${selector} time {
       outline: 1px solid #d6606d !important;
     }
 
-    ${i} code {
+    ${selector} code {
       outline: 1px solid #e04251 !important;
     }
 
-    ${i} kbd {
+    ${selector} kbd {
       outline: 1px solid #5e001f !important;
     }
 
-    ${i} samp {
+    ${selector} samp {
       outline: 1px solid #9c0033 !important;
     }
 
-    ${i} var {
+    ${selector} var {
       outline: 1px solid #d90047 !important;
     }
 
-    ${i} mark {
+    ${selector} mark {
       outline: 1px solid #ff0053 !important;
     }
 
-    ${i} bdi {
+    ${selector} bdi {
       outline: 1px solid #bf3668 !important;
     }
 
-    ${i} bdo {
+    ${selector} bdo {
       outline: 1px solid #6f1400 !important;
     }
 
-    ${i} ruby {
+    ${selector} ruby {
       outline: 1px solid #ff7b93 !important;
     }
 
-    ${i} rt {
+    ${selector} rt {
       outline: 1px solid #ff2f54 !important;
     }
 
-    ${i} rp {
+    ${selector} rp {
       outline: 1px solid #803e49 !important;
     }
 
-    ${i} span {
+    ${selector} span {
       outline: 1px solid #cc2643 !important;
     }
 
-    ${i} br {
+    ${selector} br {
       outline: 1px solid #db687d !important;
     }
 
-    ${i} wbr {
+    ${selector} wbr {
       outline: 1px solid #db175b !important;
-    }`}var e=(i,t)=>{let{globals:o}=t,n=[!0,"true"].includes(o[m]),d=t.viewMode==="docs",l=x(()=>s(d?'[data-story-block="true"]':".sb-show-main"),[t]);return f(()=>{let a=d?`addon-outline-docs-${t.id}`:"addon-outline";return n?b(a,l):u(a),()=>{u(a)}},[n,l,t]),i()},h=[e],g={[m]:!1};export{h as decorators,g as initialGlobals};
+    }`;
+}
+var withOutline = (StoryFn, context) => {
+  let { globals } = context, isActive = [true, "true"].includes(globals[PARAM_KEY]), isInDocs = context.viewMode === "docs", outlineStyles = useMemo(() => outlineCSS(isInDocs ? '[data-story-block="true"]' : ".sb-show-main"), [context]);
+  return useEffect(() => {
+    let selectorId = isInDocs ? `addon-outline-docs-${context.id}` : "addon-outline";
+    return isActive ? addOutlineStyles(selectorId, outlineStyles) : clearStyles(selectorId), () => {
+      clearStyles(selectorId);
+    };
+  }, [isActive, outlineStyles, context]), StoryFn();
+};
+var decorators = [withOutline], initialGlobals = { [PARAM_KEY]: false };
+export {
+  decorators,
+  initialGlobals
+};
