@@ -1,3 +1,5 @@
+import { mergeConfig } from 'vite';
+
 import type { StorybookConfig } from '@storybook/react-native-web-vite';
 
 const main: StorybookConfig = {
@@ -7,6 +9,13 @@ const main: StorybookConfig = {
   stories: ['../src/components/**/*.stories.mdx', '../src/components/**/*.stories.?(ts|tsx|js|jsx)'],
   typescript: {
     reactDocgen: 'react-docgen-typescript',
+  },
+  async viteFinal(config) {
+    return mergeConfig(config, {
+      build: {
+        minify: false,
+      },
+    });
   },
 };
 

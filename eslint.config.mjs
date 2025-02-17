@@ -19,7 +19,7 @@ export default [
       '**/*.config.*',
       '**/.docusaurus',
       'docs/docs/api/**',
-      'docs/static/storybook/**',
+      'docs/static/storybook-static/**',
       '.storybook.ondevice/storybook.requires.ts',
     ],
   },
