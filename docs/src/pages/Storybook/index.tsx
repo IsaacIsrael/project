@@ -13,7 +13,7 @@ const Storybook: React.FC = () => {
       title={`Storybook from ${siteConfig.title}`}
       noFooter>
       <main>
-        <iframe className={styles.storybook} src={'../storybook/'} />
+        <iframe className={styles.storybook} src={'/project/storybook-static/'} />
       </main>
     </Layout>
   );

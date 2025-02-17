@@ -20,6 +20,7 @@ export default [
       '**/.docusaurus',
       'docs/docs/api/**',
       'docs/static/storybook-static/**',
+      'docs/build/**',
       '.storybook.ondevice/storybook.requires.ts',
     ],
   },
