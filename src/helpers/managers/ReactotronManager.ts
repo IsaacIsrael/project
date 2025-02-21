@@ -6,10 +6,50 @@ import { name as appName } from '../../../app.json';
 import EnvironmentConstant from '@constants/EnvironmentConstant';
 
 import type React from 'react';
-import type { ReactotronReactNative } from 'reactotron-react-native';
+import type { ArgType, ReactotronReactNative } from 'reactotron-react-native';
+
+interface ReactotronManagerCommandConfig<A> {
+  args?: Array<A>;
+  description?: string;
+  title?: string;
+}
 
 class ReactotronManager {
+  private static commandListId: Set<number> = new Set();
   private static instance: ReactotronReactNative;
+
+  private static generateCommandListId(): string {
+    const maxId = this.commandListId.size === 0 ? 0 : Math.max(...this.commandListId);
+    const id = maxId + 1;
+    this.commandListId.add(id);
+    return id.toString();
+  }
+
+  static addCustomCommand<A extends string>(
+    callback: (params: Record<A, string>) => void,
+    commandConfig?: ReactotronManagerCommandConfig<A>,
+  ): void {
+    if (!this.instance) {
+      return;
+    }
+
+    const args = commandConfig?.args?.map((name) => ({
+      name: name,
+      type: 'string' as ArgType,
+    }));
+
+    const id = this.generateCommandListId();
+
+    this.instance.onCustomCommand({
+      args: args,
+      command: id,
+      description: commandConfig?.description ?? ' ',
+      handler: (params) => {
+        callback(params as Record<A, string>);
+      },
+      title: commandConfig?.title ?? `Custom Command ${id}`,
+    });
+  }
 
   static initialize(): void {
     if (this.instance || !EnvironmentConstant.isLocal) {
