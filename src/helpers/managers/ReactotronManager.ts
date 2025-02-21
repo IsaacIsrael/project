@@ -1,0 +1,39 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import reactotron, { openInEditor } from 'reactotron-react-native';
+
+import { name as appName } from '../../../app.json';
+
+import EnvironmentConstant from '@constants/EnvironmentConstant';
+
+import type { ReactotronReactNative } from 'reactotron-react-native';
+
+class ReactotronManager {
+  private static instance: ReactotronReactNative;
+
+  static initialize(): void {
+    if (this.instance || !EnvironmentConstant.isLocal) {
+      return;
+    }
+    this.instance = reactotron
+      .configure({
+        name: appName,
+      })
+      .useReactNative({
+        devTools: false,
+        editor: true,
+        errors: false,
+        log: true,
+        networking: {
+          ignoreUrls: /symbolicate/,
+        },
+        overlay: true,
+        storybook: true,
+      })
+      .use(openInEditor())
+      .connect();
+
+    this.instance.log('Reactotron Configured');
+  }
+}
+
+export default ReactotronManager;
