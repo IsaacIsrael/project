@@ -6,5 +6,6 @@ import type _Reactotron from 'reactotron-react-native';
 declare module 'reactotron-react-native' {
   interface ReactotronReactNative {
     overlay: (WrappedComponent: React.FC) => React.FC;
+    storybookSwitcher: (storybookUi: React.FC) => (WrappedComponent: React.FC) => React.FC;
   }
 }

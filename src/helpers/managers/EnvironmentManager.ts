@@ -11,7 +11,7 @@ class EnvironmentManager {
       case EnvironmentConstant.isStorybook:
         return StorybookUIRoot;
       case EnvironmentConstant.isLocal:
-        return ReactotronManager.setupApp(App);
+        return ReactotronManager.setupApp(StorybookUIRoot, App);
       default:
         return App;
     }

@@ -36,7 +36,7 @@ class ReactotronManager {
     this.instance.log('Reactotron Configured');
   }
 
-  static setupApp(wrappedComponent: React.FC): React.FC {
+  static setupApp(storybookUi: React.FC, wrappedComponent: React.FC): React.FC {
     if (!EnvironmentConstant.isLocal) {
       return wrappedComponent;
     }
@@ -45,7 +45,8 @@ class ReactotronManager {
       this.initialize();
     }
 
-    return this.instance.overlay(wrappedComponent);
+    const overladedComponent = this.instance.overlay(wrappedComponent);
+    return this.instance.storybookSwitcher(storybookUi)(overladedComponent);
   }
 }
 
