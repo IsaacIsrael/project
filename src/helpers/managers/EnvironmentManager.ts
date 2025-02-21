@@ -4,6 +4,7 @@ import StorybookUIRoot from '../../../.storybook.ondevice';
 
 import EnvironmentConstant from '@constants/EnvironmentConstant';
 import ReactotronManager from '@managers/ReactotronManager';
+import SetUpTestManager from '@managers/SetUpTestManager';
 
 class EnvironmentManager {
   static get app(): React.FC {
@@ -19,6 +20,7 @@ class EnvironmentManager {
 
   static initialize(): void {
     ReactotronManager.initialize();
+    SetUpTestManager.initialize();
   }
 }
 
