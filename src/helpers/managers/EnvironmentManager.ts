@@ -8,10 +8,10 @@ import ReactotronManager from '@managers/ReactotronManager';
 class EnvironmentManager {
   static get app(): React.FC {
     switch (true) {
-      case !EnvironmentConstant.isLocal:
-        return App;
       case EnvironmentConstant.isStorybook:
         return StorybookUIRoot;
+      case EnvironmentConstant.isLocal:
+        return ReactotronManager.setupApp(App);
       default:
         return App;
     }

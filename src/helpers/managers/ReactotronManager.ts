@@ -5,6 +5,7 @@ import { name as appName } from '../../../app.json';
 
 import EnvironmentConstant from '@constants/EnvironmentConstant';
 
+import type React from 'react';
 import type { ReactotronReactNative } from 'reactotron-react-native';
 
 class ReactotronManager {
@@ -33,6 +34,18 @@ class ReactotronManager {
       .connect();
 
     this.instance.log('Reactotron Configured');
+  }
+
+  static setupApp(wrappedComponent: React.FC): React.FC {
+    if (!EnvironmentConstant.isLocal) {
+      return wrappedComponent;
+    }
+
+    if (!this.instance) {
+      this.initialize();
+    }
+
+    return this.instance.overlay(wrappedComponent);
   }
 }
 
