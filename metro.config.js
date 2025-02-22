@@ -3,7 +3,7 @@ const path = require('path');
 const withStorybook = require('@storybook/react-native/metro/withStorybook');
 
 const defaultConfig = getDefaultConfig(__dirname);
-
+const enabledStorybook = process.env.STORYBOOK === 'true' || process.env.ENV === 'local';
 /**
  * Metro configuration
  * https://reactnative.dev/docs/metro
@@ -15,7 +15,7 @@ const config = {
     resolveRequest: (context, moduleName, platform) => {
       const defaultResolveResult = context.resolveRequest(context, moduleName, platform);
 
-      if (process.env.STORYBOOK !== 'true' && defaultResolveResult?.filePath?.includes?.('.storybook.ondevice/')) {
+      if (!enabledStorybook && defaultResolveResult?.filePath?.includes?.('.storybook.ondevice/')) {
         return {
           type: 'empty',
         };
@@ -29,6 +29,6 @@ const config = {
 const finalConfig = mergeConfig(defaultConfig, config);
 
 module.exports = withStorybook(finalConfig, {
-  enabled: process.env.STORYBOOK === 'true',
+  enabled: enabledStorybook,
   configPath: path.resolve(__dirname, './.storybook.ondevice'),
 });
