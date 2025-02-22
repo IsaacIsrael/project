@@ -12,6 +12,7 @@ module.exports = {
           '@components': './src/components',
           '@constants': './src/constants',
           '@managers': './src/helpers/managers',
+          '@utils': './src/helpers/utils',
           '@services': './src/services',
           '@styles': './src/styles',
           '@infra-types': './src/types/Infrastructure',
