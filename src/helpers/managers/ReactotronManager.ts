@@ -9,9 +9,39 @@ import { isValidUrl } from '@utils/isValidUrl';
 import type React from 'react';
 import type { ArgType, ReactotronReactNative } from 'reactotron-react-native';
 
-interface ReactotronManagerCommandConfig<A> {
+/**
+ * Configuration for custom commands in ReactotronManager.
+ */
+export interface ReactotronManagerCommandConfig<A> {
+  /**
+   * Arguments for the custom command.
+   */
   args?: Array<A>;
+  /**
+   * Description of the custom command.
+   */
   description?: string;
+  /**
+   * Title of the custom command.
+   */
+  title?: string;
+}
+
+/**
+ * Configuration for logging in ReactotronManager.
+ */
+export interface ReactotronManagertLogConfig {
+  /**
+   * Indicates if the log is important.
+   */
+  important?: boolean;
+  /**
+   * Label for the log.
+   */
+  label?: string;
+  /**
+   * Title for the log.
+   */
   title?: string;
 }
 
@@ -22,12 +52,9 @@ interface ReactotronManagerDefaultDisplayConfig {
   value?: any;
 }
 
-interface ReactotronManagertLogConfig {
-  important?: boolean;
-  label?: string;
-  title?: string;
-}
-
+/**
+ * Manages Reactotron integration for the application.
+ */
 class ReactotronManager {
   private static commandListId: Set<number> = new Set();
   private static instance: ReactotronReactNative;
@@ -106,6 +133,12 @@ class ReactotronManager {
     return config;
   }
 
+  /**
+   * Adds a custom command to Reactotron.
+   *
+   * @param callback - The callback function to be executed when the command is triggered.
+   * @param commandConfig - Optional configuration for the custom command.
+   */
   static addCustomCommand<A extends string>(
     callback: (params: Record<A, string>) => void,
     commandConfig?: ReactotronManagerCommandConfig<A>,
@@ -132,6 +165,9 @@ class ReactotronManager {
     });
   }
 
+  /**
+   * Initializes Reactotron for the application.
+   */
   static initialize(): void {
     if (this.instance || !EnvironmentConstant.isLocal) {
       return;
@@ -155,6 +191,12 @@ class ReactotronManager {
       .connect();
   }
 
+  /**
+   * Logs a value to Reactotron.
+   *
+   * @param value - The value to be logged.
+   * @param config - Optional configuration for the log.
+   */
   static log(value: any, config?: ReactotronManagertLogConfig): void {
     if (!this.instance) {
       return;
@@ -171,6 +213,13 @@ class ReactotronManager {
     });
   }
 
+  /**
+   * Sets up the application with Reactotron and Storybook integration.
+   *
+   * @param storybookUi - The Storybook UI component.
+   * @param wrappedComponent - The main application component.
+   * @returns The wrapped component with Reactotron and Storybook integration.
+   */
   static setupApp(storybookUi: React.FC, wrappedComponent: React.FC): React.FC {
     if (!EnvironmentConstant.isLocal) {
       return wrappedComponent;
