@@ -86,3 +86,4 @@ docs/build
 .docusaurus
 .cache-loader
 docs/static/storybook-static
+docs/docs/api
