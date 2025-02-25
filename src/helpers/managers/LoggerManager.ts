@@ -2,6 +2,7 @@
 /* eslint-disable no-console */
 import chalk from 'chalk';
 
+import ReactotronManager from '@managers/ReactotronManager';
 import formatDateISO from '@utils/formatDateISO';
 import isPlainObject from '@utils/isPlainObject';
 
@@ -26,6 +27,11 @@ export interface InitializeParams {
   severity?: Severity;
 }
 
+interface ReactotronLogFormat {
+  title?: string;
+  value: any;
+}
+
 /**
  * Manages logging for the application.
  */
@@ -42,6 +48,24 @@ class LoggerManager {
     return `${this.color.dim(`[${formatDateISO(Date.now())}]::`)}${this.color.bold(formattedMessage)}`;
   }
 
+  private static formatReacttronMessage(message: Array<any>): ReactotronLogFormat {
+    if (!Array.isArray(message)) {
+      return {
+        value: message,
+      };
+    }
+    const [lastItem, ...rest] = message.reverse();
+    const title = rest
+      .reverse()
+      .map((item) => `${item}`)
+      .join(' ');
+
+    return {
+      title: title.trim(),
+      value: lastItem,
+    };
+  }
+
   /**
    * Logs a debug message.
    *
@@ -52,6 +76,11 @@ class LoggerManager {
       return;
     }
     console.debug(this.color.underline(this.format(message)));
+    const reactotronMessage = this.formatReacttronMessage(message);
+    ReactotronManager.log(reactotronMessage.value, {
+      label: 'DEBUG',
+      title: reactotronMessage.title,
+    });
   }
 
   /**
@@ -64,6 +93,12 @@ class LoggerManager {
       return;
     }
     console.error(this.color.bgRed.whiteBright(this.format(message)));
+    const reactotronMessage = this.formatReacttronMessage(message);
+    ReactotronManager.log(reactotronMessage.value, {
+      important: true,
+      label: 'ERROR',
+      title: reactotronMessage.title,
+    });
   }
 
   /**
@@ -76,6 +111,12 @@ class LoggerManager {
       return;
     }
     console.log(this.color.bgCyanBright.black(this.format(message)));
+    const reactotronMessage = this.formatReacttronMessage(message);
+    ReactotronManager.log(reactotronMessage.value, {
+      important: true,
+      label: 'INFO',
+      title: reactotronMessage.title,
+    });
   }
 
   /**
@@ -97,6 +138,12 @@ class LoggerManager {
       return;
     }
     console.info(this.color.bgGreenBright.black(this.format(message)));
+    const reactotronMessage = this.formatReacttronMessage(message);
+    ReactotronManager.log(reactotronMessage.value, {
+      important: true,
+      label: 'SUCCESS',
+      title: reactotronMessage.title,
+    });
   }
 
   /**
@@ -109,6 +156,12 @@ class LoggerManager {
       return;
     }
     console.warn(this.color.bgYellow.black(this.format(message)));
+    const reactotronMessage = this.formatReacttronMessage(message);
+    ReactotronManager.log(reactotronMessage.value, {
+      important: true,
+      label: 'WARN',
+      title: reactotronMessage.title,
+    });
   }
 }
 
