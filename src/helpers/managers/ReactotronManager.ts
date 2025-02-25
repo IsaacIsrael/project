@@ -180,7 +180,7 @@ class ReactotronManager {
         devTools: false,
         editor: true,
         errors: false,
-        log: true,
+        log: false,
         networking: {
           ignoreUrls: /symbolicate/,
         },

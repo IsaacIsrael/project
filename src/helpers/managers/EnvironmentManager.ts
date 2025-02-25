@@ -3,6 +3,7 @@ import App from 'App';
 import StorybookUIRoot from '../../../.storybook.ondevice';
 
 import EnvironmentConstant from '@constants/EnvironmentConstant';
+import LoggerManager, { Severity } from '@managers/LoggerManager';
 import ReactotronManager from '@managers/ReactotronManager';
 import SetUpTestManager from '@managers/SetUpTestManager';
 
@@ -32,6 +33,8 @@ class EnvironmentManager {
   static initialize(): void {
     ReactotronManager.initialize();
     SetUpTestManager.initialize();
+    const severity = EnvironmentConstant.isLocal ? Severity.verbose : Severity.error;
+    LoggerManager.initialize({ severity });
   }
 }
 
