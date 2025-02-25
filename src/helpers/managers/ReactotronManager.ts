@@ -180,7 +180,7 @@ class ReactotronManager {
         devTools: false,
         editor: true,
         errors: false,
-        log: true,
+        log: false,
         networking: {
           ignoreUrls: /symbolicate/,
         },
@@ -207,8 +207,8 @@ class ReactotronManager {
     this.instance.display({
       image: defaultConfig.image,
       important: config?.important,
-      name: config?.label ?? defaultConfig.name,
-      preview: config?.title ?? defaultConfig.preview,
+      name: config?.label || defaultConfig.name,
+      preview: config?.title || defaultConfig.preview,
       value: defaultConfig.value,
     });
   }

@@ -1,4 +1,6 @@
 /* eslint-disable no-console */
+import LoggerManager from './LoggerManager';
+
 import ReactotronManager from '@managers/ReactotronManager';
 
 class SetUpTestManager {
@@ -7,8 +9,8 @@ class SetUpTestManager {
       console.log('Hello world', args);
     });
     ReactotronManager.addCustomCommand(
-      (args) => {
-        console.log('Hello world', args);
+      () => {
+        console.log('Hello world');
       },
       {
         description: 'Test the Reactotrom Commands',
@@ -25,7 +27,6 @@ class SetUpTestManager {
         title: 'Navigate To Screen',
       },
     );
-
     ReactotronManager.addCustomCommand(
       () => {
         this.testReactotronDisplay();
@@ -34,6 +35,44 @@ class SetUpTestManager {
         title: 'Test Reactotron display',
       },
     );
+    ReactotronManager.addCustomCommand(
+      () => {
+        this.testLog();
+      },
+      {
+        title: 'Test Log display',
+      },
+    );
+  }
+
+  private static testLog(): void {
+    LoggerManager.debug('Debug message');
+    LoggerManager.error('Error message');
+    LoggerManager.info('Info message');
+    LoggerManager.success('Success message');
+    LoggerManager.warn('Warn message');
+    const logTestMessage = (): void => {
+      const _a = 1;
+    };
+    LoggerManager.debug('Function', logTestMessage);
+    LoggerManager.debug('Array', [1, 2, 3]);
+    LoggerManager.debug('Array', ['Oi', 'Hello', 'Hola', logTestMessage, 'test']);
+    LoggerManager.debug('Object', {
+      foo: () => {
+        const _a = 1;
+      },
+      key: 'value',
+      test: [1, 2, 3],
+      value: 1,
+    });
+    LoggerManager.debug('Object', 'Test', {
+      foo: () => {
+        const _a = 1;
+      },
+      key: 'value',
+      test: [1, 2, 3],
+      value: 1,
+    });
   }
 
   private static testReactotronDisplay(): void {
