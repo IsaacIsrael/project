@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import { AppRegistry } from 'react-native';
 
 import { name as appName } from './app.json';

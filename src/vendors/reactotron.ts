@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 import type React from 'react';
 import type _Reactotron from 'reactotron-react-native';
 
