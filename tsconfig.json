@@ -8,6 +8,7 @@
       "@constants/*": ["src/constants/*"],
       "@managers/*": ["src/helpers/managers/*"],
       "@utils/*": ["src/helpers/utils/*"],
+      "@hooks/*": ["src/helpers/hooks/*"],
       "@services/*": ["src/services/*"],
       "@styles/*": ["src/styles/*"],
       "@store/*": ["src/store/*"],
