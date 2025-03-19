@@ -17,6 +17,7 @@ module.exports = {
           '@styles': './src/styles',
           '@infra-types': './src/types/Infrastructure',
           '@store': './src/store',
+          '@duckers': './src/duckers',
           '@hooks': './src/helpers/hooks',
         },
       },
