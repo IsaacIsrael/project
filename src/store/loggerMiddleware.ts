@@ -8,6 +8,7 @@ const disableLogAction = (action: UnknownAction): boolean =>
   action.type.endsWith('/fulfilled') ||
   action.type.endsWith('/rejected') ||
   action.type.startsWith('requests/') ||
+  action.type.startsWith('persist/') ||
   LoggerManager.severity > Severity.debug;
 
 const loggerMiddleware: Middleware =
