@@ -4,10 +4,12 @@ import { StyleSheet, Text, useColorScheme, View } from 'react-native';
 import Colors from '@styles/colors';
 
 type Props = PropsWithChildren<{
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  readonly Container?: React.JSXElementConstructor<any>;
   readonly title: string;
 }>;
 
-const Section = ({ children, title }: Props): React.JSX.Element => {
+const Section = ({ children, Container = Text, title }: Props): React.JSX.Element => {
   const isDarkMode = useColorScheme() === 'dark';
   return (
     <View style={styles.sectionContainer}>
@@ -20,7 +22,7 @@ const Section = ({ children, title }: Props): React.JSX.Element => {
         ]}>
         {title}
       </Text>
-      <Text
+      <Container
         style={[
           styles.sectionDescription,
           {
@@ -28,7 +30,7 @@ const Section = ({ children, title }: Props): React.JSX.Element => {
           },
         ]}>
         {children}
-      </Text>
+      </Container>
     </View>
   );
 };
