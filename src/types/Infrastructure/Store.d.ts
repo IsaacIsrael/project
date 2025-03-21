@@ -33,6 +33,19 @@ export interface AppAsyncThunkConfig {
 export type AppDispatch = typeof store.dispatch;
 
 /**
+ * Generic type for the value returned by an AsyncThunk.
+ *
+ * @template Returned - The type of the value returned by the thunk.
+ * @template RejectWithValue - The type of the rejection value.
+ */
+export type AsyncThunkReturned<Returned, RejectWithValue> = Promise<
+  | Awaited<Returned>
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  | Awaited<Returned extends any ? Promise<Returned> : never>
+  | RejectWithValue
+>;
+
+/**
  * The type of the store's root state.
  */
 export type RootState = ReturnType<typeof rootReducer>;

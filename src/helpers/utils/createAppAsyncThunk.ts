@@ -1,7 +1,29 @@
+import LoggerManager from 'helpers/managers/LoggerManager';
+
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import type { AppAsyncThunk, AppAsyncThunkConfig } from '@infra-types/Store';
-import type { AsyncThunkOptions, AsyncThunkPayloadCreator } from '@reduxjs/toolkit';
+import type { AppAsyncThunk, AppAsyncThunkConfig, AsyncThunkReturned } from '@infra-types/Store';
+import type { AsyncThunkOptions, AsyncThunkPayloadCreator, GetThunkAPI } from '@reduxjs/toolkit';
+
+function thunkLoggerHandler<Returned, ThunkArg>(
+  callback: AsyncThunkPayloadCreator<Returned, ThunkArg, AppAsyncThunkConfig>,
+): AsyncThunkPayloadCreator<Returned, ThunkArg, AppAsyncThunkConfig> {
+  return async (
+    value: ThunkArg,
+    thunkAPI: GetThunkAPI<AppAsyncThunkConfig>,
+  ): AsyncThunkReturned<Returned, ReturnType<typeof thunkAPI.rejectWithValue>> => {
+    const actionName = callback.name;
+    try {
+      LoggerManager.info(`THUNKS:: Initialize ${actionName}`);
+      const response = await callback(value, thunkAPI);
+      LoggerManager.success(`THUNKS:: Finished ${actionName} with success`);
+      return response;
+    } catch (error) {
+      LoggerManager.error(`THUNKS:: Failed ${actionName}: ${error}`);
+      throw error;
+    }
+  };
+}
 
 /**
  * Creates an asynchronous thunk action with integrated logging and request handling.
@@ -18,5 +40,6 @@ export default function createAppAsyncThunk<Returned, ThunkArg>(
   payloadCreator: AsyncThunkPayloadCreator<Returned, ThunkArg, AppAsyncThunkConfig>,
   options?: AsyncThunkOptions<ThunkArg, AppAsyncThunkConfig>,
 ): AppAsyncThunk<Returned, ThunkArg> {
-  return createAsyncThunk<Returned, ThunkArg, AppAsyncThunkConfig>(typePrefix, payloadCreator, options);
+  const loggerCallback = thunkLoggerHandler<Returned, ThunkArg>(payloadCreator);
+  return createAsyncThunk<Returned, ThunkArg, AppAsyncThunkConfig>(typePrefix, loggerCallback, options);
 }
