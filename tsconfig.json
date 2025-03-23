@@ -6,10 +6,14 @@
       "*": ["src/*"],
       "@components/*": ["src/components/*"],
       "@constants/*": ["src/constants/*"],
+      "@duckers/*": ["src/duckers/*"],
       "@managers/*": ["src/helpers/managers/*"],
       "@utils/*": ["src/helpers/utils/*"],
+      "@hooks/*": ["src/helpers/hooks/*"],
       "@services/*": ["src/services/*"],
       "@styles/*": ["src/styles/*"],
+      "@store/*": ["src/store/*"],
+      "@store": ["src/store"],
       "@infra-types/*": ["src/types/Infrastructure/*"]
     }
   }

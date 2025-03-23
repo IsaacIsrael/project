@@ -37,7 +37,11 @@ interface ReactotronLogFormat {
  */
 class LoggerManager {
   private static color = new chalk.Instance({ level: 3 });
-  private static severity: Severity;
+  private static severityValue: Severity;
+
+  static get severity(): Severity {
+    return this.severityValue;
+  }
 
   private static format(message: Array<any>): string {
     const formattedMessage = message
@@ -72,7 +76,7 @@ class LoggerManager {
    * @param message - The message to be logged.
    */
   static debug(...message: any): void {
-    if (this.severity > Severity.debug) {
+    if (this.severityValue > Severity.debug) {
       return;
     }
     console.debug(this.color.underline(this.format(message)));
@@ -89,7 +93,7 @@ class LoggerManager {
    * @param message - The message to be logged.
    */
   static error(...message: any): void {
-    if (this.severity > Severity.error) {
+    if (this.severityValue > Severity.error) {
       return;
     }
     console.error(this.color.bgRed.whiteBright(this.format(message)));
@@ -107,7 +111,7 @@ class LoggerManager {
    * @param message - The message to be logged.
    */
   static info(...message: any): void {
-    if (this.severity > Severity.verbose) {
+    if (this.severityValue > Severity.verbose) {
       return;
     }
     console.log(this.color.bgCyanBright.black(this.format(message)));
@@ -125,7 +129,7 @@ class LoggerManager {
    * @param params - The initialization parameters.
    */
   static initialize({ severity }: InitializeParams): void {
-    this.severity = severity ?? Severity.verbose;
+    this.severityValue = severity ?? Severity.verbose;
   }
 
   /**
@@ -134,7 +138,7 @@ class LoggerManager {
    * @param message - The message to be logged.
    */
   static success(...message: any): void {
-    if (this.severity > Severity.verbose) {
+    if (this.severityValue > Severity.verbose) {
       return;
     }
     console.info(this.color.bgGreenBright.black(this.format(message)));
@@ -152,7 +156,7 @@ class LoggerManager {
    * @param message - The message to be logged.
    */
   static warn(...message: any): void {
-    if (this.severity > Severity.warn) {
+    if (this.severityValue > Severity.warn) {
       return;
     }
     console.warn(this.color.bgYellow.black(this.format(message)));

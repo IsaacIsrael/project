@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import reactotron, { openInEditor } from 'reactotron-react-native';
+import { reactotronRedux } from 'reactotron-redux';
 
 import { name as appName } from '../../../app.json';
 
@@ -7,7 +8,7 @@ import EnvironmentConstant from '@constants/EnvironmentConstant';
 import { isValidUrl } from '@utils/isValidUrl';
 
 import type React from 'react';
-import type { ArgType, ReactotronReactNative } from 'reactotron-react-native';
+import type { ArgType, CreateEnhancerReturn, ReactotronReactNative } from 'reactotron-react-native';
 
 /**
  * Configuration for custom commands in ReactotronManager.
@@ -166,6 +167,19 @@ class ReactotronManager {
   }
 
   /**
+   *
+   * Create enhancer for Redux store
+   *
+   */
+  static createEnhancer(): CreateEnhancerReturn {
+    if (!this.instance) {
+      this.initialize();
+    }
+
+    return this.instance.createEnhancer();
+  }
+
+  /**
    * Initializes Reactotron for the application.
    */
   static initialize(): void {
@@ -188,6 +202,18 @@ class ReactotronManager {
         storybook: true,
       })
       .use(openInEditor())
+      .use(
+        reactotronRedux({
+          except: [
+            'requests/requestStarted',
+            'requests/requestFinished',
+            /.*\/pending/g,
+            /.*\/rejected/g,
+            /.*\/fulfilled/g,
+            /.*/g,
+          ],
+        }),
+      )
       .connect();
   }
 
