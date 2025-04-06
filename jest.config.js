@@ -13,7 +13,7 @@ module.exports = {
     '^@styles/(.*)$': '<rootDir>/src/styles/$1',
     '^@store/(.*)$': '<rootDir>/src/store/$1',
     '^@infra-types/(.*)$': '<rootDir>/src/types/Infrastructure/$1',
-    '^tests/(.*)$': '<rootDir>/tests/$1',
+    '^@test/(.*)$': '<rootDir>/test/$1',
     '^/(.*)$': '<rootDir>/src/$1',
   },
   transformIgnorePatterns: ['/node_modules/(?!react-native|react-redux|reactotron-react-native)/'],
