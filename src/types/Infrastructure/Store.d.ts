@@ -1,4 +1,4 @@
-import type { AsyncThunk } from '@reduxjs/toolkit';
+import type { AsyncThunk, EnhancedStore, StoreEnhancer, Tuple, UnknownAction } from '@reduxjs/toolkit';
 import type store from '@store';
 import type rootReducer from '@store/rootReducer';
 
@@ -31,6 +31,12 @@ export interface AppAsyncThunkConfig {
  * The type of the store's dispatch.
  */
 export type AppDispatch = typeof store.dispatch;
+
+export type AppStore = EnhancedStore<
+  RootState,
+  UnknownAction,
+  Tuple<[StoreEnhancer<{ dispatch: AppDispatch }>, StoreEnhancer]>
+>;
 
 /**
  * Generic type for the value returned by an AsyncThunk.
