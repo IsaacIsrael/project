@@ -6,13 +6,14 @@ import Colors from '@styles/colors';
 type Props = PropsWithChildren<{
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   readonly Container?: React.JSXElementConstructor<any>;
+  readonly testID?: string;
   readonly title: string;
 }>;
 
-const Section = ({ children, Container = Text, title }: Props): React.JSX.Element => {
+const Section = ({ children, Container = Text, testID, title }: Props): React.JSX.Element => {
   const isDarkMode = useColorScheme() === 'dark';
   return (
-    <View style={styles.sectionContainer}>
+    <View style={styles.sectionContainer} testID={testID}>
       <Text
         style={[
           styles.sectionTitle,

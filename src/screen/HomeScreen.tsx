@@ -65,7 +65,7 @@ const HomeScreen = (): React.JSX.Element => {
           style={{
             backgroundColor: isDarkMode ? Colors.black : Colors.white,
           }}>
-          <Section Container={View} title={'Counter'}>
+          <Section Container={View} testID={'counter'} title={'Counter'}>
             <View style={styles.counterContainer}>
               <TouchableOpacity style={styles.counterButton} onPress={handleOnDecrementActionPress}>
                 <Text style={styles.counterButtonText}>{'-'}</Text>
@@ -76,18 +76,20 @@ const HomeScreen = (): React.JSX.Element => {
               </TouchableOpacity>
             </View>
           </Section>
-          <Section title={'Step One'}>
+          <Section testID={'step-one'} title={'Step One'}>
             {'Edit '}
-            <Text style={styles.highlight}>{'App.tsx'}</Text> {'to change this screen and then come back to see your'}
-            {'edits.'}
+            <Text style={styles.highlight}>{'App.tsx'}</Text>
+            {' to change this screen and then come back to see your edits.'}
           </Section>
-          <Section title={'See Your Changes'}>
+          <Section testID={'see-your-changes'} title={'See Your Changes'}>
             <ReloadInstructions />
           </Section>
-          <Section title={'Debug'}>
+          <Section testID={'debug'} title={'Debug'}>
             <DebugInstructions />
           </Section>
-          <Section title={'Learn More'}>{'Read the docs to discover what to do next:'}</Section>
+          <Section testID={'learn-more'} title={'Learn More'}>
+            {'Read the docs to discover what to do next:'}
+          </Section>
           <LinkList />
         </View>
       </ScrollView>
