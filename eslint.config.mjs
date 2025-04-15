@@ -6,6 +6,7 @@ import pluginReact from 'eslint-plugin-react';
 import eslintConfigPrettier from 'eslint-config-prettier';
 import reactRefresh from 'eslint-plugin-react-refresh';
 import perfectionist from 'eslint-plugin-perfectionist';
+import testingLibrary from 'eslint-plugin-testing-library';
 
 const compat = new FlatCompat();
 
@@ -22,6 +23,7 @@ export default [
       'docs/static/storybook-static/**',
       'docs/build/**',
       '.storybook.ondevice/storybook.requires.ts',
+      'jest.setup.js',
     ],
   },
   {
@@ -42,6 +44,7 @@ export default [
   ...compat.extends('plugin:react-hooks/recommended'),
   ...compat.extends('plugin:react-native/all'),
   reactRefresh.configs.recommended,
+  testingLibrary.configs['flat/react'],
   {
     plugins: {
       perfectionist,

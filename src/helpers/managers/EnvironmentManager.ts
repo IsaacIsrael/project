@@ -11,6 +11,19 @@ import SetUpTestManager from '@managers/SetUpTestManager';
  * Manages the environment setup for the application.
  */
 class EnvironmentManager {
+  private static get severity(): Severity {
+    switch (true) {
+      case EnvironmentConstant.isLocal:
+        return Severity.verbose;
+      case EnvironmentConstant.isTest:
+        return Severity.silent;
+      case EnvironmentConstant.isStorybook:
+        return Severity.silent;
+      default:
+        return Severity.error;
+    }
+  }
+
   /**
    * Gets the appropriate application component based on the environment.
    *
@@ -31,10 +44,11 @@ class EnvironmentManager {
    * Initializes the environment managers.
    */
   static initialize(): void {
-    ReactotronManager.initialize();
-    SetUpTestManager.initialize();
-    const severity = EnvironmentConstant.isLocal ? Severity.verbose : Severity.error;
-    LoggerManager.initialize({ severity });
+    if (EnvironmentConstant.isLocal) {
+      ReactotronManager.initialize();
+      SetUpTestManager.initialize();
+    }
+    LoggerManager.initialize({ severity: this.severity });
   }
 }
 

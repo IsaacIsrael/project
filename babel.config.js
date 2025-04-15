@@ -8,7 +8,6 @@ module.exports = {
         root: ['./src'],
         extensions: ['.ios.js', '.android.js', '.js', '.ts', '.tsx', '.json'],
         alias: {
-          tests: ['./tests/'],
           '@components': './src/components',
           '@constants': './src/constants',
           '@managers': './src/helpers/managers',
@@ -19,6 +18,7 @@ module.exports = {
           '@store': './src/store',
           '@duckers': './src/duckers',
           '@hooks': './src/helpers/hooks',
+          '@test': './test',
         },
       },
     ],

@@ -1,3 +1,4 @@
+import { CounterActions } from '../counter.constants';
 import { setCounterValue } from '../counter.slice';
 import selectCount from '../selectors/selectCount';
 
@@ -11,7 +12,7 @@ import sleep from '@utils/sleep';
  * @returns {Promise<number>} A promise that resolves to the new counter value.
  */
 const increment = createAppAsyncThunk<number, number>(
-  'counter/increment',
+  CounterActions.increment,
   async function incrementAction(value, thunkAPI) {
     await sleep(1000);
     const count = selectCount(thunkAPI.getState());

@@ -64,7 +64,7 @@ const links = [
 const LinkList = (): React.JSX.Element => {
   const isDarkMode = useColorScheme() === 'dark';
   return (
-    <View style={styles.container}>
+    <View style={styles.container} testID={'link-list'}>
       {links.map(({ id, description, link, title }) => (
         <Fragment key={id}>
           <View

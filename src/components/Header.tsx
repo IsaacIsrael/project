@@ -1,5 +1,5 @@
 import React from 'react';
-import { ImageBackground, StyleSheet, Text, useColorScheme } from 'react-native';
+import { ImageBackground, StyleSheet, Text, useColorScheme, View } from 'react-native';
 
 import HermesBadge from '@components/HermesBadge';
 import Colors from '@styles/colors';
@@ -7,30 +7,31 @@ import Colors from '@styles/colors';
 const Header = (): React.JSX.Element => {
   const isDarkMode = useColorScheme() === 'dark';
   return (
-    <ImageBackground
-      style={[
-        styles.background,
-        {
-          backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-        },
-      ]}
-      accessibilityRole={'image'}
-      imageStyle={styles.logo}
-      source={require('../assets/images/logo.png')}
-      testID={'new-app-screen-header'}>
-      <HermesBadge />
-      <Text
+    <View testID={'new-app-screen-header'}>
+      <ImageBackground
         style={[
-          styles.text,
+          styles.background,
           {
-            color: isDarkMode ? Colors.white : Colors.black,
+            backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
           },
-        ]}>
-        {'Welcome to'}
-        {'\n'}
-        {'React Native'}
-      </Text>
-    </ImageBackground>
+        ]}
+        imageStyle={styles.logo}
+        source={require('../assets/images/logo.png')}
+        testID={'new-app-screen-header-image'}>
+        <HermesBadge />
+        <Text
+          style={[
+            styles.text,
+            {
+              color: isDarkMode ? Colors.white : Colors.black,
+            },
+          ]}>
+          {'Welcome to'}
+          {'\n'}
+          {'React Native'}
+        </Text>
+      </ImageBackground>
+    </View>
   );
 };
 
