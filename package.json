@@ -71,6 +71,7 @@
     "@storybook/react-native": "8.5.5",
     "@storybook/react-native-web-vite": "8.6.3",
     "@storybook/test": "8.6.3",
+    "@storybook/test-runner": "0.22.0",
     "@testing-library/react-native": "13.2.0",
     "@types/jest": "29.5.14",
     "@types/lodash": "4.17.16",
