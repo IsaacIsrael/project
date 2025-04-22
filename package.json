@@ -31,6 +31,7 @@
     "storybook:web": "storybook dev -p 6006",
     "storybook:web:build": "storybook build -o docs/static/storybook-static",
     "storybook:web:chromatic": "npx chromatic --project-token=$PROJECT_CHROMATIC_TOKEN",
+    "storybook:web:test": "test-storybook",
     "clear:watchman": "watchman watch-del '.' ; watchman watch-project '.'"
   },
   "dependencies": {
