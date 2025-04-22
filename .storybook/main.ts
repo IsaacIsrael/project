@@ -8,6 +8,7 @@ const main: StorybookConfig = {
     '@storybook/addon-essentials',
     '@chromatic-com/storybook',
     '@storybook/addon-interactions',
+    '@storybook/addon-a11y',
   ],
   docs: {},
   framework: '@storybook/react-native-web-vite',
