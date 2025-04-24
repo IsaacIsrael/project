@@ -25,6 +25,7 @@
     "docs:clean-install": "npm ci --prefix ./docs",
     "docs:build": "npm run build --prefix ./docs",
     "storybook": "concurrently -n web,mobile -c magentaBright,greenBright -k \"npm run storybook:web\" \"npm run storybook:device\"",
+    "storybook:test": "npm run storybook:web:test && npm run storybook:web:chromatic",
     "prestorybook:device": "npm run clear:watchman",
     "storybook:device": "STORYBOOK=true npm run react-native",
     "storybook:device:generate": "sb-rn-get-stories --config-path .storybook.ondevice",
