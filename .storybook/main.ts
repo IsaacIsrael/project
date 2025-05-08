@@ -9,6 +9,7 @@ const main: StorybookConfig = {
     '@chromatic-com/storybook',
     '@storybook/addon-interactions',
     '@storybook/addon-a11y',
+    '@storybook/addon-coverage',
   ],
   docs: {},
   framework: '@storybook/react-native-web-vite',
