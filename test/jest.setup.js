@@ -1,4 +1,4 @@
-const { default: EnvironmentManager } = require('helpers/managers/EnvironmentManager');
+const { default: EnvironmentManager } = require('/helpers/managers/EnvironmentManager');
 
 EnvironmentManager.initialize();
 
@@ -15,18 +15,18 @@ jest.mock('@react-native-async-storage/async-storage', () =>
 jest.mock('reactotron-react-native', () => ({
   clear: jest.fn(),
   configure: jest.fn().mockReturnThis(),
-  useReactNative: jest.fn().mockReturnThis(),
-  use: jest.fn().mockReturnThis(),
   connect: jest.fn().mockReturnThis(),
+  createEnhancer: jest.fn(),
+  display: jest.fn(),
   error: jest.fn(),
   log: jest.fn(),
+  onCustomCommand: jest.fn(),
   openInEditor: jest.fn(),
   send: jest.fn(),
   trackError: jest.fn(),
+  use: jest.fn().mockReturnThis(),
+  useReactNative: jest.fn().mockReturnThis(),
   warn: jest.fn(),
-  createEnhancer: jest.fn(),
-  display: jest.fn(),
-  onCustomCommand: jest.fn(),
 }));
 
 jest.mock('@utils/sleep', () => ({
@@ -34,7 +34,7 @@ jest.mock('@utils/sleep', () => ({
   default: jest.fn().mockResolvedValue(undefined),
 }));
 
-jest.mock('./.storybook.ondevice', () => ({
+jest.mock('../.storybook.ondevice', () => ({
   __esModule: true,
   default: jest.fn().mockResolvedValue(null),
 }));

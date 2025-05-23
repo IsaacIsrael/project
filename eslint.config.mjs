@@ -23,7 +23,7 @@ export default [
       'docs/static/storybook-static/**',
       'docs/build/**',
       '.storybook.ondevice/storybook.requires.ts',
-      'jest.setup.js',
+      'test/jest.setup.js',
     ],
   },
   {
