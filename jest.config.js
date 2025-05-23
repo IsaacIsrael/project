@@ -2,6 +2,7 @@ module.exports = {
   preset: 'react-native',
   setupFiles: ['<rootDir>/node_modules/react-native-gesture-handler/jestSetup.js', '<rootDir>/jest.setup.js'],
   testPathIgnorePatterns: ['/node_modules/', '<rootDir>/android/', '<rootDir>/ios/', '<rootDir>/docs/'],
+  watchPlugins: ['jest-watch-typeahead/filename', 'jest-watch-typeahead/testname'],
   moduleNameMapper: {
     '^@utils/(.*)$': '<rootDir>/src/helpers/utils/$1',
     '^@hooks/(.*)$': '<rootDir>/src/helpers/hooks/$1',
