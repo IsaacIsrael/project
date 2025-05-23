@@ -6,7 +6,7 @@
     "prestart": "npm run clear:watchman",
     "start": "ENV=local npm run react-native",
     "pretest": "npm run clear:watchman",
-    "test": "jest --runInBand --verbose --noStackTrace",
+    "test": "is-ci-cli \"test:coverage\" \"test:watch\"",
     "test:watch": "npm run jest:watch",
     "test:coverage": "npm-run-all --parallel jest:coverage storybook:test:coverage",
     "jest": "jest --runInBand --verbose --noStackTrace",
