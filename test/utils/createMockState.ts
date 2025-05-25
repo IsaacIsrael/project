@@ -1,9 +1,12 @@
 import merge from 'lodash/merge';
 
-import rootReducer from '../src/store/rootReducer';
+import rootReducer from '../../src/store/rootReducer';
 
 import type { RootState } from '@infra-types/Store';
-import type { DeepPartial } from '@test/Type';
+
+type DeepPartial<T> = {
+  [P in keyof T]?: T[P] extends object ? DeepPartial<T[P]> : T[P];
+};
 
 export default function createMockState(preloadedState?: DeepPartial<RootState>): RootState {
   const defaultState = rootReducer(undefined, { type: '@@INIT' });
