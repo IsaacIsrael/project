@@ -38,8 +38,3 @@ jest.mock('../.storybook.ondevice', () => ({
   __esModule: true,
   default: jest.fn().mockResolvedValue(null),
 }));
-
-jest.mock('@services/openURLInBrowser', () => ({
-  __esModule: true,
-  default: jest.fn(),
-}));
