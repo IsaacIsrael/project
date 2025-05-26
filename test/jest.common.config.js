@@ -4,7 +4,7 @@ module.exports = {
   preset: 'react-native',
   rootDir: path.join(__dirname, '..'),
   setupFiles: ['<rootDir>/node_modules/react-native-gesture-handler/jestSetup.js', '<rootDir>/test/jest.setup.js'],
-  setupFilesAfterEnv: ['<rootDir>/test/jest.setup.global.ts'],
+  setupFilesAfterEnv: ['<rootDir>/test/jest.setup.global.ts', '<rootDir>/test/jest.setup.server.ts'],
   testPathIgnorePatterns: [
     '/node_modules/',
     '<rootDir>/android/',
@@ -44,7 +44,6 @@ module.exports = {
     '^@store/(.*)$': '<rootDir>/src/store/$1',
     '^@infra-types/(.*)$': '<rootDir>/src/types/Infrastructure/$1',
     '^@test-utils/(.*)$': '<rootDir>/test/utils/',
-    '^/(.*)$': '<rootDir>/src/$1',
   },
   coverageThreshold: {
     global: {
