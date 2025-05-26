@@ -1,7 +1,6 @@
 import selectIsOperating from './selectIsOperating';
 
-import createMockState from '@test/createMockState';
-import { describeSelector } from '@test/describeApp';
+import { createMockState } from '@test-utils';
 
 describeSelector('counter - selectIsOperating', () => {
   test('should return false when status is "idle"', () => {

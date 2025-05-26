@@ -4,8 +4,7 @@ import { CounterActions } from '../counter.constants';
 import { setCounterValue } from '../counter.slice';
 import decrement from './decrement.action';
 
-import { describeAction } from '@test/describeApp';
-import setupStore from '@test/setupStore';
+import { setupStore } from '@test-utils';
 
 describeAction('counter - decrement', () => {
   const store = setupStore();
