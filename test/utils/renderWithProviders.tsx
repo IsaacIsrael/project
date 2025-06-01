@@ -25,10 +25,8 @@ const withWrapper = (store: AppStore) =>
 
 export default function renderWithProviders(
   ui: React.ReactElement,
-  extendedRenderOptions: ExtendedRenderOptions = {},
+  { preloadedState = {}, store = setupStore({ preloadedState }), ...renderOptions }: ExtendedRenderOptions = {},
 ): StoreRenderResult {
-  const { preloadedState = {}, store = setupStore(preloadedState), ...renderOptions } = extendedRenderOptions;
-
   return {
     store,
     ...render(ui, { wrapper: withWrapper(store), ...renderOptions }),
