@@ -1,23 +1,24 @@
 import sleep from 'helpers/utils/sleep';
 
 import { CounterActions } from '../counter.constants';
-import { setCounterValue } from '../counter.slice';
 import increment from './increment.action';
 
 import { setupStore } from '@test-utils';
 
+import type { AppStore } from 'types/Infrastructure/Store';
+
 describeAction('counter - increment', () => {
-  const store = setupStore();
+  let store: AppStore;
   beforeEach(() => {
-    store.dispatch(setCounterValue(10));
+    store = setupStore({ preloadedState: { counter: { value: 10 } } });
     jest.clearAllMocks();
   });
 
   test('should increment the counter value after delay', async () => {
-    expect(store.getState().counter.value).toBe(10);
     const resultAction = await store.dispatch(increment(3));
 
     expect(sleep).toHaveBeenCalledWith(1000);
+    expect(sleep).toHaveBeenCalledTimes(1);
 
     expect(store.getState().counter.value).toBe(13);
 
@@ -26,8 +27,6 @@ describeAction('counter - increment', () => {
   });
 
   test('should handle multiple increments correctly', async () => {
-    expect(store.getState().counter.value).toBe(10);
-
     await store.dispatch(increment(2));
     expect(store.getState().counter.value).toBe(12);
 
@@ -36,8 +35,6 @@ describeAction('counter - increment', () => {
   });
 
   test('should allow incrementing to large values', async () => {
-    expect(store.getState().counter.value).toBe(10);
-
     await store.dispatch(increment(100));
     expect(store.getState().counter.value).toBe(110);
   });

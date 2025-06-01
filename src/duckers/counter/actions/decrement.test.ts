@@ -1,25 +1,25 @@
 import sleep from 'helpers/utils/sleep';
 
 import { CounterActions } from '../counter.constants';
-import { setCounterValue } from '../counter.slice';
 import decrement from './decrement.action';
 
 import { setupStore } from '@test-utils';
 
+import type { AppStore } from 'types/Infrastructure/Store';
+
 describeAction('counter - decrement', () => {
-  const store = setupStore();
+  let store: AppStore;
 
   beforeEach(() => {
-    store.dispatch(setCounterValue(10));
+    store = setupStore({ preloadedState: { counter: { value: 10 } } });
     jest.clearAllMocks();
   });
 
   test('should decrement the counter value after delay', async () => {
-    expect(store.getState().counter.value).toBe(10);
-
     const resultAction = await store.dispatch(decrement(3));
 
     expect(sleep).toHaveBeenCalledWith(1000);
+    expect(sleep).toHaveBeenCalledTimes(1);
 
     expect(store.getState().counter.value).toBe(7);
 
@@ -28,8 +28,6 @@ describeAction('counter - decrement', () => {
   });
 
   test('should handle multiple decrements correctly', async () => {
-    expect(store.getState().counter.value).toBe(10);
-
     await store.dispatch(decrement(2));
     expect(store.getState().counter.value).toBe(8);
 
@@ -38,8 +36,6 @@ describeAction('counter - decrement', () => {
   });
 
   test('should allow decrementing to negative values', async () => {
-    expect(store.getState().counter.value).toBe(10);
-
     await store.dispatch(decrement(15));
     expect(store.getState().counter.value).toBe(-5);
   });
