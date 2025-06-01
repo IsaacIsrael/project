@@ -1,13 +1,18 @@
 import rootReducer from '../../src/store/rootReducer';
+import createMockState from './createMockState';
 
 import { configureStore } from '@reduxjs/toolkit';
 
+import type { DeepPartial } from './createMockState';
 import type { AppStore, RootState } from 'types/Infrastructure/Store';
 
-export default function setupStore(preloadedState?: Partial<RootState>): AppStore {
-  const defaultState = rootReducer(undefined, { type: '@@INIT' });
+interface Option {
+  preloadedState?: DeepPartial<RootState>;
+}
+
+export default function setupStore(options?: Option): AppStore {
   return configureStore({
-    preloadedState: { ...defaultState, ...preloadedState } as RootState,
+    preloadedState: createMockState(options?.preloadedState),
     reducer: rootReducer,
   });
 }
