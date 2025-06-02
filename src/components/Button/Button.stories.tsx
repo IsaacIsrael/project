@@ -33,12 +33,18 @@ export const Basic: Story = {
   args: {
     onPress: fn(),
     testID: 'my-button',
+    text: 'Basic',
   },
   play: async ({ args, canvasElement, step }) => {
     const canvas = within(canvasElement);
-    const button = await canvas.findByTestId(args.testID ?? '');
 
+    expect(await canvas.findByTestId(args.testID ?? '')).toBeTruthy();
+    expect(await canvas.findByText(args.text)).toBeTruthy();
+    expect(await canvas.findByRole('button')).toBeTruthy();
+
+    const button = await canvas.findByRole('button');
     expect(button).toBeTruthy();
+
     await step('button arguments', async () => {
       expect(button).toHaveTextContent(args.text);
     });
@@ -54,11 +60,10 @@ export const AnotherExample: Story = {
   args: {
     onPress: fn(),
     testID: 'another-button',
-    text: 'Another example',
   },
   play: async ({ args, canvasElement, step }) => {
     const canvas = within(canvasElement);
-    const button = await canvas.findByTestId(args.testID ?? '');
+    const button = await canvas.findByRole('button');
 
     expect(button).toBeTruthy();
 
