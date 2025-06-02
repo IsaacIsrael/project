@@ -12,7 +12,12 @@ export type MyButtonProps = {
 };
 
 const MyButton: React.FC<MyButtonProps> = ({ onPress, style, testID, text }: MyButtonProps) => (
-  <TouchableOpacity activeOpacity={0.8} style={[styles.container, style]} testID={testID} onPress={onPress}>
+  <TouchableOpacity
+    accessibilityRole={'button'}
+    activeOpacity={0.8}
+    style={[styles.container, style]}
+    testID={testID}
+    onPress={onPress}>
     <Text style={styles.text}>{text}</Text>
   </TouchableOpacity>
 );
