@@ -3,6 +3,8 @@ import { StyleSheet, View } from 'react-native';
 
 import MyButton from './Button';
 
+import { expect, fn, userEvent, waitFor, within } from '@storybook/test';
+
 import type { Meta, StoryObj } from '@storybook/react';
 
 const meta = {
@@ -27,11 +29,52 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Basic: Story = {};
+export const Basic: Story = {
+  args: {
+    onPress: fn(),
+    testID: 'my-button',
+    text: 'Basic',
+  },
+  play: async ({ args, canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    expect(await canvas.findByTestId(args.testID ?? '')).toBeTruthy();
+    expect(await canvas.findByText(args.text)).toBeTruthy();
+    expect(await canvas.findByRole('button')).toBeTruthy();
+
+    const button = await canvas.findByRole('button');
+    expect(button).toBeTruthy();
+
+    await step('button arguments', async () => {
+      expect(button).toHaveTextContent(args.text);
+    });
+
+    await step('click on button', async () => {
+      await userEvent.click(button);
+    });
+    await waitFor(() => expect(args.onPress).toHaveBeenCalled());
+  },
+};
 
 export const AnotherExample: Story = {
   args: {
-    text: 'Another example',
+    onPress: fn(),
+    testID: 'another-button',
+  },
+  play: async ({ args, canvasElement, step }) => {
+    const canvas = within(canvasElement);
+    const button = await canvas.findByRole('button');
+
+    expect(button).toBeTruthy();
+
+    await step('button arguments', async () => {
+      expect(button).toHaveTextContent(args.text);
+    });
+
+    await step('click on button', async () => {
+      await userEvent.click(button);
+    });
+    await waitFor(() => expect(args.onPress).toHaveBeenCalled());
   },
 };
 
