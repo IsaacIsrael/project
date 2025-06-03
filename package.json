@@ -36,8 +36,9 @@
     "storybook:web": "storybook dev -p 6006",
     "storybook:web:build": "storybook build -o docs/static/storybook-static",
     "storybook:web:chromatic": "npx chromatic --project-token=$PROJECT_CHROMATIC_TOKEN",
-    "storybook:web:test": "test-storybook",
-    "storybook:web:test:coverage": "concurrently -n storybook,test --raw -k \"npm run storybook:web -- --ci\" \"wait-on http://localhost:6006 && npm run storybook:web:test -- --coverage\"",
+    "storybook:web:test:coverage": "concurrently -n storybook,test --raw -k \"npm run storybook:web -- --ci\" \"wait-on http://localhost:6006 && npm run test-storybook -- --coverage\"",
+    "storybook:web:test:watch": "concurrently -n storybook,test --raw -k \"npm run storybook:web -- --ci\" \"wait-on http://localhost:6006 && npm run test-storybook -- --watch\"",
+    "test-storybook": "test-storybook",
     "clear:watchman": "watchman watch-del '.' ; watchman watch-project '.'"
   },
   "dependencies": {
