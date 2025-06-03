@@ -15,3 +15,9 @@ import customTest from './test/test';
 (global as any).assertionIfIOS = assertionIfIOS;
 (global as any).test = customTest;
 (global as any).it = customTest;
+
+global.HermesInternal = {
+  getRuntimeProperties: jest.fn().mockReturnValue({
+    'OSS Release Version': '1.0.0',
+  }),
+};

@@ -1,9 +1,3 @@
-global.HermesInternal = {
-  getRuntimeProperties: jest.fn().mockReturnValue({
-    'OSS Release Version': '1.0.0', // Return the value you expect from HermesInternal
-  }),
-};
-
 jest.mock('@react-native-async-storage/async-storage', () =>
   require('@react-native-async-storage/async-storage/jest/async-storage-mock'),
 );
