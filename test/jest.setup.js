@@ -1,7 +1,3 @@
-const { default: EnvironmentManager } = require('/helpers/managers/EnvironmentManager');
-
-EnvironmentManager.initialize();
-
 global.HermesInternal = {
   getRuntimeProperties: jest.fn().mockReturnValue({
     'OSS Release Version': '1.0.0', // Return the value you expect from HermesInternal
