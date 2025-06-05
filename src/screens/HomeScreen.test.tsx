@@ -6,7 +6,7 @@ import { openUrlHandlerMock } from '@services/__handler__/openUrlInBrowser.handl
 import { fireEvent, renderWithProviders, screen, userEvent, waitFor } from '@test-utils';
 
 describeScreen('Home', () => {
-  test('render ', () => {
+  test.platform('render ', async () => {
     renderWithProviders(<HomeScreen />);
     assertionIfAndroid(() => {
       expect(screen.toJSON()).toMatchSnapshot();
