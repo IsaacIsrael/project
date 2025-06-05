@@ -2,8 +2,6 @@
 import chalk from 'chalk';
 import { Platform } from 'react-native';
 
-import { test as originalTest } from '@jest/globals';
-
 interface PlatformSelect {
   android?: unknown;
   default?: unknown;
@@ -58,22 +56,8 @@ function describeIOS(fn: jest.EmptyFunction): void {
   });
 }
 
-export default function test(description: string, fn: jest.EmptyFunction, timeout?: number): void {
-  const fnString = fn.toString();
-
-  const runsOnAndroid = fnString.includes('assertionIfAndroid');
-  const runsOnIOS = fnString.includes('assertionIfIOS');
-
-  if (!runsOnAndroid && !runsOnIOS) {
-    originalTest(description, fn);
-    return;
-  }
-
-  if (runsOnAndroid) {
-    describeAndroid(() => originalTest(description, fn, timeout));
-  }
-
-  if (runsOnIOS) {
-    describeIOS(() => originalTest(description, fn, timeout));
-  }
+export default function platform(description: string, fn: jest.EmptyFunction, timeout?: number): void {
+  const callback: jest.EmptyFunction = () => test(description, fn, timeout);
+  describeAndroid(callback);
+  describeIOS(callback);
 }
