@@ -28,7 +28,10 @@ export default [
   },
   {
     languageOptions: {
-      globals: globals.browser,
+      globals: {
+        ...globals.jest,
+        ...globals.browser,
+      },
     },
   },
   {
