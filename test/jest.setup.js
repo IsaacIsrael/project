@@ -1,28 +1,8 @@
-jest.mock('@react-native-async-storage/async-storage', () =>
-  require('@react-native-async-storage/async-storage/jest/async-storage-mock'),
-);
+jest.mock('@react-native-async-storage/async-storage');
 
-jest.mock('reactotron-react-native', () => ({
-  clear: jest.fn(),
-  configure: jest.fn().mockReturnThis(),
-  connect: jest.fn().mockReturnThis(),
-  createEnhancer: jest.fn(),
-  display: jest.fn(),
-  error: jest.fn(),
-  log: jest.fn(),
-  onCustomCommand: jest.fn(),
-  openInEditor: jest.fn(),
-  send: jest.fn(),
-  trackError: jest.fn(),
-  use: jest.fn().mockReturnThis(),
-  useReactNative: jest.fn().mockReturnThis(),
-  warn: jest.fn(),
-}));
+jest.mock('reactotron-react-native');
 
-jest.mock('@utils/sleep', () => ({
-  __esModule: true,
-  default: jest.fn().mockResolvedValue(undefined),
-}));
+jest.mock('@utils/sleep');
 
 jest.mock('../.storybook.ondevice', () => ({
   __esModule: true,
