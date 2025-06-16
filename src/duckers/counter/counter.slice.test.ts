@@ -1,7 +1,5 @@
 import counterReducer, { setCounterValue } from './counter.slice';
 
-import { describeSlice } from '@test/describeApp';
-
 import type { CounterState } from './counter.slice';
 
 describeSlice('counter', () => {

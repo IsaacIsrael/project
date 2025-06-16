@@ -1,7 +1,6 @@
 import selectCount from './selectCount';
 
-import createMockState from '@test/createMockState';
-import { describeSelector } from '@test/describeApp';
+import { createMockState } from '@test-utils';
 
 describeSelector('counter - selectCount', () => {
   test('should return the counter value from state', () => {

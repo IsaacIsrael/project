@@ -15,7 +15,7 @@
       "@store/*": ["src/store/*"],
       "@store": ["src/store"],
       "@infra-types/*": ["src/types/Infrastructure/*"],
-      "@test/*": ["test/*"]
+      "@test-utils": ["test/utils/index.ts"]
     }
   }
 }

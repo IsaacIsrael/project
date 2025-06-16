@@ -1,0 +1,16 @@
+export default {
+  clear: jest.fn(),
+  configure: jest.fn().mockReturnThis(),
+  connect: jest.fn().mockReturnThis(),
+  createEnhancer: jest.fn(),
+  display: jest.fn(),
+  error: jest.fn(),
+  log: jest.fn(),
+  onCustomCommand: jest.fn(),
+  openInEditor: jest.fn(),
+  send: jest.fn(),
+  trackError: jest.fn(),
+  use: jest.fn().mockReturnThis(),
+  useReactNative: jest.fn().mockReturnThis(),
+  warn: jest.fn(),
+};

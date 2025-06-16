@@ -2,7 +2,7 @@ import React from 'react';
 import { Text } from 'react-native';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
-import HomeScreen from 'screen/HomeScreen';
+import HomeScreen from 'screens/HomeScreen';
 
 import store, { persistor } from '@store';
 

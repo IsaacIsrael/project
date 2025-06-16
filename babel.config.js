@@ -18,7 +18,7 @@ module.exports = {
           '@store': './src/store',
           '@duckers': './src/duckers',
           '@hooks': './src/helpers/hooks',
-          '@test': './test',
+          '@test-utils': './test/utils/index.ts',
         },
       },
     ],

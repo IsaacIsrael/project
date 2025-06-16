@@ -1,0 +1,62 @@
+const path = require('path');
+
+module.exports = {
+  preset: 'react-native',
+  rootDir: path.join(__dirname, '..'),
+  setupFiles: ['<rootDir>/node_modules/react-native-gesture-handler/jestSetup.js', '<rootDir>/test/jest.setup.js'],
+  setupFilesAfterEnv: [
+    '<rootDir>/test/jest.setup.global.ts',
+    '<rootDir>/test/jest.setup.server.ts',
+    '<rootDir>/test/jest.setup.environment.ts',
+  ],
+  testPathIgnorePatterns: [
+    '/node_modules/',
+    '<rootDir>/android/',
+    '<rootDir>/ios/',
+    '<rootDir>/docs/',
+    '<rootDir>/dist/',
+    '<rootDir>/builds/',
+    '<rootDir>/coverage/',
+    '<rootDir>/test',
+  ],
+  coveragePathIgnorePatterns: [
+    '/node_modules/',
+    '<rootDir>/android/',
+    '<rootDir>/ios/',
+    '<rootDir>/docs/',
+    '<rootDir>/dist/',
+    '<rootDir>/builds/',
+    '<rootDir>/coverage/',
+    '<rootDir>/test',
+    '<rootDir>/src/types',
+    '<rootDir>/src/styles',
+    '<rootDir>/src/assets',
+    '<rootDir>/src/constants',
+    '<rootDir>/src/vendors',
+    '<rootDir>/src/App.tsx',
+    '<rootDir>/src/helpers/managers/',
+  ],
+  moduleNameMapper: {
+    '^@utils/(.*)$': '<rootDir>/src/helpers/utils/$1',
+    '^@hooks/(.*)$': '<rootDir>/src/helpers/hooks/$1',
+    '^@components/(.*)$': '<rootDir>/src/components/$1',
+    '^@constants/(.*)$': '<rootDir>/src/constants/$1',
+    '^@duckers/(.*)$': '<rootDir>/src/duckers/$1',
+    '^@managers/(.*)$': '<rootDir>/src/helpers/managers/$1',
+    '^@services/(.*)$': '<rootDir>/src/services/$1',
+    '^@styles/(.*)$': '<rootDir>/src/styles/$1',
+    '^@store/(.*)$': '<rootDir>/src/store/$1',
+    '^@infra-types/(.*)$': '<rootDir>/src/types/Infrastructure/$1',
+    '^@test-utils/(.*)$': '<rootDir>/test/utils/',
+  },
+  coverageThreshold: {
+    global: {
+      branches: 48,
+      functions: 87,
+      lines: 77,
+      statements: 77,
+    },
+  },
+
+  transformIgnorePatterns: ['/node_modules/(?!react-native|react-redux)/'],
+};
