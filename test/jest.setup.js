@@ -8,3 +8,5 @@ jest.mock('../.storybook.ondevice', () => ({
   __esModule: true,
   default: jest.fn().mockResolvedValue(null),
 }));
+
+jest.mock('redux-persist');
