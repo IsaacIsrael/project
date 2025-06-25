@@ -12,6 +12,7 @@
     "jest": "jest --runInBand --verbose --noStackTrace",
     "jest:watch": "npm run jest -- --watch",
     "jest:coverage": "npm run jest -- --coverage",
+    "maestro:ios:build": "bash ./scripts/bundle_maestro_ios.sh",
     "react-native": "react-native start --reset-cache --client-logs",
     "android": "react-native run-android",
     "ios": "react-native run-ios",
