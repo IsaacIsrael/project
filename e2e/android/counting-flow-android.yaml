@@ -1,0 +1,24 @@
+appId: com.project
+---
+- launchApp
+- assertVisible: '0'
+
+- tapOn:
+    text: '+'
+    waitToSettleTimeoutMs: 0
+- assertVisible: 'loading'
+- assertVisible: '1'
+
+- stopApp
+- launchApp
+- assertVisible: '1'
+
+- tapOn:
+    text: '-'
+    waitToSettleTimeoutMs: 0
+- assertVisible: 'loading'
+- assertVisible: '0'
+
+- stopApp
+- launchApp
+- assertVisible: '0'
