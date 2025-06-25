@@ -97,3 +97,7 @@ docs/docs/api
 # Storybook
 #
 build-storybook.log
+
+# Builds
+#
+builds/
