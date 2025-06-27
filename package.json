@@ -5,7 +5,7 @@
   "scripts": {
     "prestart": "npm run clear:watchman",
     "start": "ENV=local npm run react-native",
-    "pretest": "npm run clear:watchman",
+    "pretest": "is-ci-cli \"\" \"clear:watchman\"",
     "test": "is-ci-cli \"test:coverage\" \"test:watch\"",
     "test:watch": "npm run jest:watch",
     "test:coverage": "npm-run-all --parallel jest:coverage storybook:test:coverage",
