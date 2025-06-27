@@ -1,0 +1,154 @@
+name: Pull Request Check
+
+on: pull_request
+jobs:
+  detect_changes:
+    runs-on: ubuntu-latest
+    outputs:
+      components_changed: ${{ steps.filter.outputs.components }}
+      fetch-depth: 0
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check for component changes
+        id: filter
+        run: |
+          git fetch origin ${{ github.event.pull_request.base.ref }}
+          BASE_SHA=${{ github.event.pull_request.base.sha }}
+          CHANGED=$(git diff --name-only $BASE_SHA)
+
+          echo "Changed files:"
+          echo "$CHANGED"
+
+          if echo "$CHANGED" | grep -q '^src/components/'; then
+            echo "components=true" >> $GITHUB_OUTPUT
+          else
+            echo "components=false" >> $GITHUB_OUTPUT
+          fi
+  prettier:
+    name: Lint Prettier
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 'lts/hydrogen'
+
+      - name: Install project dependencies
+        run: npm ci
+
+      - name: Lint Prettier
+        run: npm run prettier:check
+  eslint:
+    name: Lint ESLint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 'lts/hydrogen'
+
+      - name: Install project dependencies
+        run: npm ci
+
+      - name: Lint ESLint
+        run: npm run eslint:check
+  typescript:
+    name: Lint types
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 'lts/hydrogen'
+
+      - name: Install project dependencies
+        run: npm ci
+
+      - name: Install docs dependencies
+        run: npm run docs:clean-install
+
+      - name: Lint types
+        run: npm run type:check
+  comitlint:
+    name: Lint commit messages
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 'lts/hydrogen'
+
+      - name: Install project dependencies
+        run: npm ci
+
+      - name: Lint commit messages
+        run: npx commitlint --from ${{ github.event.pull_request.base.sha }} --to ${{ github.event.pull_request.head.sha }} --verbose
+  test:
+    name: Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 'lts/hydrogen'
+
+      - name: Set up Git user
+        run: |
+          git config --global user.email "ci@yourdomain.com"
+          git config --global user.name "CI Bot"
+
+      - name: Install project dependencies
+        run: npm ci
+
+      - name: Install docs dependencies
+        run: npm run docs:clean-install
+
+      - name: Install Playwright
+        run: npx playwright install --with-deps
+
+      - name: Running tests
+        run: npm t
+
+      - name: Upload results to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+
+      - name: Upload test results to Codecov
+        if: ${{ !cancelled() }}
+        uses: codecov/test-results-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./junit.xml
+  chromatic:
+    name: UI Snapshot (Chromatic) test
+    runs-on: ubuntu-latest
+    if: needs.detect_changes.outputs.components_changed == 'true'
+    needs: [detect_changes]
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 'lts/hydrogen'
+
+      - run: npm ci
+
+      - name: Run Chromatic
+        uses: chromaui/action@v1
+        with:
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}

@@ -26,7 +26,7 @@ export default MyButton;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'purple',
+    backgroundColor: 'pink',
     borderRadius: 8,
     paddingHorizontal: 16,
     paddingVertical: 8,
