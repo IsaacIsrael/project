@@ -2,6 +2,30 @@ name: Pull Request Check
 
 on: pull_request
 jobs:
+  detect_changes:
+    runs-on: ubuntu-latest
+    outputs:
+      components_changed: ${{ steps.filter.outputs.components }}
+      fetch-depth: 0
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check for component changes
+        id: filter
+        run: |
+          git fetch origin ${{ github.event.pull_request.base.ref }}
+          BASE_SHA=${{ github.event.pull_request.base.sha }}
+          CHANGED=$(git diff --name-only $BASE_SHA)
+
+          echo "Changed files:"
+          echo "$CHANGED"
+
+          if echo "$CHANGED" | grep -q '^src/components/'; then
+            echo "components=true" >> $GITHUB_OUTPUT
+          else
+            echo "components=false" >> $GITHUB_OUTPUT
+          fi
   prettier:
     name: Lint Prettier
     runs-on: ubuntu-latest
@@ -100,3 +124,31 @@ jobs:
         uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
+
+      - name: Upload test results to Codecov
+        if: ${{ !cancelled() }}
+        uses: codecov/test-results-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./junit.xml
+  chromatic:
+    name: UI Snapshot (Chromatic) test
+    runs-on: ubuntu-latest
+    if: needs.detect_changes.outputs.components_changed == 'true'
+    needs: [detect_changes]
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 'lts/hydrogen'
+
+      - run: npm ci
+
+      - name: Run Chromatic
+        uses: chromaui/action@v1
+        with:
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
