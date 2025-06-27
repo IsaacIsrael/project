@@ -104,6 +104,11 @@ android {
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
+        maestro {
+            initWith debug
+            matchingFallbacks = ['debug']
+            debuggable true
+        }
     }
 }
 

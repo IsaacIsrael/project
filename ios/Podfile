@@ -14,6 +14,12 @@ if linkage != nil
   use_frameworks! :linkage => linkage.to_sym
 end
 
+project 'Project.xcodeproj', {
+  'Debug' => :debug,
+  'Release' => :release,
+  'Maestro' => :debug
+}
+
 target 'Project' do
   config = use_native_modules!
 
