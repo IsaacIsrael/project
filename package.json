@@ -15,6 +15,7 @@
     "jest:coverage": "npm run jest -- --coverage",
     "maestro:ios": "bash ./scripts/run_maestro_ios.sh",
     "maestro:ios:build": "bash ./scripts/bundle_maestro_ios.sh",
+    "maestro:android": "bash ./scripts/run_maestro_android.sh",
     "maestro:android:build": "bash ./scripts/bundle_maestro_android.sh",
     "react-native": "react-native start --reset-cache --client-logs",
     "android": "react-native run-android",
