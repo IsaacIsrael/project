@@ -15,7 +15,7 @@ function load(app) {
       await execSync('npm run storybook:web:build', { cwd: previousFolder, stdio: 'inherit' });
       app.logger.info('Storybook Build finished with succeeded!');
     } catch (error) {
-      app.logger.error('Erro to build Storybook:', error);
+      app.logger.error('Error to build Storybook:', error);
     }
   });
 }

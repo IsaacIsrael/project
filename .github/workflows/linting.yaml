@@ -1,58 +1,30 @@
-name: Linting
+name: Pull Request Linting
 
 on: pull_request
 jobs:
-  prettier:
-    name: Lint Prettier
+  lint:
+    name: ${{ matrix.title }}
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 'lts/hydrogen'
-
-      - name: Install project dependencies
-        run: npm ci
-
-      - name: Lint Prettier
-        run: npm run prettier:check
-  eslint:
-    name: Lint ESLint
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 'lts/hydrogen'
-
-      - name: Install project dependencies
-        run: npm ci
-
-      - name: Lint ESLint
-        run: npm run eslint:check
-  typescript:
-    name: Lint types
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 'lts/hydrogen'
-
-      - name: Install project dependencies
-        run: npm ci
-
-      - name: Install docs dependencies
-        run: npm run docs:clean-install
-
-      - name: Lint types
-        run: npm run type:check
-  comitlint:
-    name: Lint commit messages
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        tool: [prettier, eslint, type, commit]
+        include:
+          - tool: prettier
+            title: Lint Prettier
+            command: npm run prettier:check
+            needs_docs: false
+          - tool: eslint
+            title: Lint ESLint
+            command: npm run eslint:check
+            needs_docs: false
+          - tool: type
+            title: Lint types
+            command: npm run type:check
+            needs_docs: true
+          - tool: commit
+            title: Lint commit messages
+            command: npx commitlint --from ${{ github.event.pull_request.base.sha }} --to ${{ github.event.pull_request.head.sha }} --verbose
+            needs_docs: false
     steps:
       - uses: actions/checkout@v4
         with:
@@ -61,9 +33,14 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 'lts/hydrogen'
+          cache: 'npm'
 
       - name: Install project dependencies
         run: npm ci
 
-      - name: Lint commit messages
-        run: npx commitlint --from ${{ github.event.pull_request.base.sha }} --to ${{ github.event.pull_request.head.sha }} --verbose
+      - name: Install docs dependencies
+        if: ${{ matrix.needs_docs }}
+        run: npm run docs:clean-install
+
+      - name: ${{ matrix.title }}
+        run: ${{ matrix.command }}

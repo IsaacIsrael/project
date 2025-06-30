@@ -1,0 +1,60 @@
+name: Pull Request Tests and Coverage
+
+on: pull_request
+jobs:
+  test:
+    name: ${{ matrix.title }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        tool: [integration, unit]
+        include:
+          - tool: unit
+            title: Upload Tests Coverage
+            command: npm run jest:coverage -- --selectProjects=unit
+            flag: unit
+          - tool: integration
+            title: Upload Tests Coverage
+            command: npm run jest:coverage -- --selectProjects=integration
+            flag: integration
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 'lts/hydrogen'
+          cache: 'npm'
+
+      - name: Install project dependencies
+        run: npm ci
+
+      - name: ${{ matrix.title }}
+        run: ${{ matrix.command }}
+
+      - name: Upload results to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          flags: ${{ matrix.flag }}
+      - name: Upload test results to Codecov
+        if: ${{ !cancelled() }}
+        uses: codecov/test-results-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+
+      # - name: Set up Git user
+      #   run: |
+      #     git config --global user.email "ci@yourdomain.com"
+      #     git config --global user.name "CI Bot"
+
+      # - name: Install project dependencies
+      #   run: npm ci
+
+      # - name: Install docs dependencies
+      #   run: npm run docs:clean-install
+
+      # - name: Install Playwright
+      #   run: npx playwright install --with-deps
+
+      # - name: Running tests
+      #   run: npm t
