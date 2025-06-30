@@ -73,9 +73,10 @@ yarn-error.log*
 #
 .metro-health-check*
 
-# testing
+# Testing
 #
 /coverage
+junit.xml
 
 # Yarn
 #
