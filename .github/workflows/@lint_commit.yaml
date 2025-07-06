@@ -1,0 +1,20 @@
+name: 📝 Lint Commit
+
+on:
+  workflow_call:
+
+jobs:
+  prettier:
+    name: 📝 Lint Commit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 📦 Project Setup
+        uses: ./.github/actions/setup/
+
+      - name: 🔍 Run Prettier
+        run: npx commitlint --from ${{ github.event.pull_request.base.sha }} --to ${{ github.event.pull_request.head.sha }} --verbose
+        shell: bash

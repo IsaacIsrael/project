@@ -1,0 +1,44 @@
+name: Project Setup
+description: Centralized setup cache, install
+
+inputs:
+  with-docs:
+    description: Whether to run docs:clean-install
+    default: 'false'
+  with-playwright:
+    description: Whether to install playwright
+    default: 'false'
+  cache-name:
+    description: Custom suffix to isolate cache (lint, test)
+    default: 'default'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Cache NPM
+      uses: actions/cache@v4
+      with:
+        path: ~/.npm
+        key: ${{ runner.os }}-npm-${{ inputs.cache-name }}-${{ hashFiles('package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-npm-${{ inputs.cache-name }}-
+
+    - name: Setup Node
+      uses: actions/setup-node@v4
+      with:
+        node-version: 'lts/hydrogen'
+        cache: 'npm'
+
+    - name: Install project dependencies
+      run: npm ci
+      shell: bash
+
+    - name: Install docs dependencies
+      if: ${{ inputs.with-docs == 'true' }}
+      run: npm run docs:clean-install
+      shell: bash
+
+    - name: Install Playwright
+      if: ${{ inputs.with-playwright == 'true' }}
+      run: npx playwright install --with-deps
+      shell: bash

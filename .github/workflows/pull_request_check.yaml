@@ -1,0 +1,97 @@
+name: Pull Request Checks
+
+on: pull_request
+
+jobs:
+  prettier:
+    name: 🔍 Lint Prettier
+    uses: ./.github/workflows/@lint_prettier.yaml
+
+  eslint:
+    name: 🧹 Lint ESLint
+    uses: ./.github/workflows/@lint_eslint.yaml
+
+  type:
+    name: 🧠 Lint Type
+    uses: ./.github/workflows/@lint_type.yaml
+
+  commit:
+    name: 📝 Lint Commit
+    uses: ./.github/workflows/@lint_type.yaml
+
+  test:
+    name: ${{ matrix.title }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        tool: [unit, integration, component]
+        include:
+          - tool: unit
+            title: 🧪 Unit Tests Coverage
+            command: npm run jest:coverage -- --selectProjects=unit
+            needs_docs: false
+            needs_playwright: false
+            # lcov_files: ./coverage/lcov.info
+            flag: unit
+          - tool: integration
+            title: 🔗 Integration Tests Coverage
+            command: npm run jest:coverage -- --selectProjects=integration
+            flag: integration
+            needs_docs: false
+            needs_playwright: false
+            # lcov_files: ./coverage/lcov.info
+          - tool: component
+            title: 🎭 Component Tests Coverage
+            command: npm run storybook:web:test:coverage
+            flag: component
+            needs_docs: true
+            needs_playwright: true
+            # lcov_files: ./coverage/storybook/lcov.info
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Cache NPM
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-npm-${{ matrix.tool }}-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-npm-${{ matrix.tool }}-
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 'lts/hydrogen'
+          cache: 'npm'
+
+      - name: Install project dependencies
+        run: npm ci
+
+      - name: Install docs dependencies
+        if: ${{ matrix.needs_docs }}
+        run: npm run docs:clean-install
+
+      - name: Install Playwright
+        if: ${{ matrix.needs_playwright }}
+        run: npx playwright install --with-deps
+
+      - name: Run ${{ matrix.title }}
+        run: ${{ matrix.command }}
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          flags: ${{ matrix.flag }}
+          fail_ci_if_error: true
+
+      - name: Upload test results to Codecov
+        if: ${{ !cancelled() }}
+        uses: codecov/test-results-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          flags: ${{ matrix.flag }}
+          files: ./coverage/report.xml
+          fail_ci_if_error: true

@@ -1,0 +1,20 @@
+name: 🔍 Lint Prettier
+
+on:
+  workflow_call:
+
+jobs:
+  prettier:
+    name: 🔍 Lint Prettier
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 📦 Project Setup
+        uses: ./.github/actions/setup/
+
+      - name: 🔍 Run Prettier
+        run: npm run prettier:check
+        shell: bash
