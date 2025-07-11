@@ -1,0 +1,21 @@
+name: 🧠 Lint Type
+
+on:
+  workflow_call:
+
+jobs:
+  type:
+    name: 🧠 Lint Type
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 📦 Project Setup
+        uses: ./.github/actions/setup/
+        with:
+          with-docs: true
+
+      - name: 🧠 Run Type Check
+        run: npm run type:check

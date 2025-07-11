@@ -4,6 +4,14 @@ on:
   push:
     branches:
       - main
+    paths:
+      - 'src/**'
+      - 'README.md'
+      - 'docs/**'
+      - 'docs/**/*.js'
+      - 'docs/**/*.mjs'
+      - '.github/workflows/deploy_docs.yml'
+  workflow_dispatch:
 
 jobs:
   build:
@@ -15,12 +23,18 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 'lts/hydrogen'
+          cache: 'npm'
 
       - name: Install project dependencies
         run: npm ci
 
       - name: Install docs dependencies
         run: npm run docs:clean-install
+
+      - name: Add version info
+        run: |
+          echo "DEPLOY_DATE=$(date +'%Y-%m-%d %H:%M:%S')" >> $GITHUB_ENV
+          echo "const deployInfo = {date:'${{ env.DEPLOY_DATE }}',commit:'${{ github.sha }}'};" > docs/src/deploy-info.js
 
       - name: Build docs
         run: npm run docs:build
