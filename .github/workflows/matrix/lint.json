@@ -1,0 +1,29 @@
+[
+  {
+    "key": "eslint",
+    "title": "✨ Lint Code Quality",
+    "command_title": "✨ Run ESLint",
+    "command": "npm run eslint:check",
+    "files": "**/*.{js,mjs,cjs,ts,jsx,tsx}"
+  },
+  {
+    "key": "prettier",
+    "title": "🎨  Lint Code Style",
+    "command_title": "🎨  Run Prettier",
+    "command": "npm run prettier:check"
+  },
+  {
+    "key": "typescript",
+    "title": "🧠 Lint Type Check",
+    "command_title": "🧠 Run TypeScript",
+    "command": "npm run type:check",
+    "files": "**/*.{ts,tsx}",
+    "setup-docs": true
+  },
+  {
+    "key": "commitlint",
+    "title": "📝 Lint Commit Message",
+    "command_title": "📝 Run Commitlint",
+    "command": "npx commitlint --from $BASE_SHA --to $HEAD_SHA --verbose"
+  }
+]

@@ -1,0 +1,61 @@
+name: 💅 Lint Check
+
+on:
+  workflow_call:
+    inputs:
+      skip_tools:
+        description: 'Comma-separated list of tools to skip'
+        required: false
+        type: string
+        default: ''
+
+jobs:
+  define-matrix:
+    name: 📁 Define Lint Matrix
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.filter.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 📁 Generate lint matrix from JSON file
+        id: filter
+        uses: ./.github/actions/generate-matrix
+        with:
+          matrix_file_path: .github/workflows/matrix/lint.json
+          skip_keys: ${{ inputs.skip_tools }}
+
+  lint:
+    name: ${{ matrix.title }}
+    needs: define-matrix
+    runs-on: ubuntu-latest
+    strategy:
+      matrix: ${{ fromJson(needs.define-matrix.outputs.matrix) }}
+
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 🔎 Detect changes
+        uses: ./.github/actions/detect-changed/
+        id: detect-changed
+        with:
+          files: ${{ toJson(matrix.files) }}
+
+      - name: ⚙️ Project Setup
+        if: steps.detect-changed.outputs.any_changed == 'true'
+        uses: ./.github/actions/setup/
+        with:
+          docs: ${{ matrix.setup-docs }}
+          playwright: ${{ matrix.setup-playwright }}
+
+      - name: ${{ matrix.command_title }}
+        if: steps.detect-changed.outputs.any_changed == 'true'
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: ${{ matrix.command }}
