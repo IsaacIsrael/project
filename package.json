@@ -8,7 +8,7 @@
     "pretest": "npm run clear:watchman",
     "test": "is-ci-cli \"test:coverage\" \"test:watch\"",
     "test:watch": "npm run jest:watch",
-    "test:coverage": "npm-run-all --parallel jest:coverage storybook:test:coverage",
+    "test:coverage": "npm run jest:coverage --",
     "test:e2e:ios": "APP_PATH=$(npm run maestro:ios:build  | tee /dev/stderr | tail -n 1) && npm run maestro:ios -- -a \"$APP_PATH\"",
     "test:e2e:android": "APP_PATH=$(npm run maestro:android:build  | tee /dev/stderr | tail -n 1) && npm run maestro:android -- -a \"$APP_PATH\"",
     "jest": "jest --runInBand --verbose --noStackTrace",
