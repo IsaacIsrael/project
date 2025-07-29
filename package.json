@@ -13,7 +13,7 @@
     "test:e2e:android": "APP_PATH=$(npm run maestro:android:build  | tee /dev/stderr | tail -n 1) && npm run maestro:android -- -a \"$APP_PATH\"",
     "jest": "jest --runInBand --verbose --noStackTrace",
     "jest:watch": "npm run jest -- --watch",
-    "jest:coverage": "npm run jest -- --coverage",
+    "jest:coverage": "npm run jest -- --coverage --ci",
     "maestro:ios": "bash ./scripts/run_maestro_ios.sh",
     "maestro:ios:build": "bash ./scripts/bundle_maestro_ios.sh",
     "maestro:android": "bash ./scripts/run_maestro_android.sh",
