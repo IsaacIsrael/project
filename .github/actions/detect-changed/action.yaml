@@ -1,0 +1,71 @@
+name: 'Detect & Report Changed Files'
+description: 'Handles array or string input and runs tj-actions/changed-files'
+
+inputs:
+  files:
+    description: 'JSON array or newline string of globs'
+    required: true
+
+outputs:
+  any_changed:
+    description: '"true" if any file matched'
+    value: ${{ steps.detect.outputs.any_changed }}
+
+runs:
+  using: 'composite'
+  steps:
+    - id: normalize
+      shell: bash
+      run: |
+        echo "🔧 Normalizing input..."
+
+        RAW='${{ inputs.files }}'
+
+        # Try to parse as JSON array
+        if echo "$RAW" | jq -e 'type == "array"' >/dev/null 2>&1; then
+          echo "✅ Detected JSON array"
+          echo "$RAW" | jq -r '.[]' > file_list.txt
+
+        # Try to parse as JSON string (e.g., with literal "\n")
+        elif echo "$RAW" | jq -e 'type == "string"' >/dev/null 2>&1; then
+          PARSED=$(echo "$RAW" | jq -r '.')
+          if [[ "$PARSED" == *$'\n'* ]]; then
+            echo "✅ Detected string with \\n — converting to lines"
+            echo "$PARSED" > file_list.txt
+          else
+            echo "✅ Detected single string glob"
+            echo "$PARSED" > file_list.txt
+          fi
+
+        # Fallback: raw multiline string (YAML block)
+        else
+          echo "ℹ️ Detected raw multiline string"
+          echo "$RAW" > file_list.txt
+        fi
+
+        echo "file_list<<EOF" >> $GITHUB_OUTPUT
+        cat file_list.txt >> $GITHUB_OUTPUT
+        echo "EOF" >> $GITHUB_OUTPUT
+
+    - id: detect
+      uses: tj-actions/changed-files@v44
+      with:
+        files: ${{ steps.normalize.outputs.file_list }}
+
+    - name: Report change status
+      shell: bash
+      run: |
+        echo "📦 Input file patterns:"
+        cat file_list.txt | while IFS= read -r line; do
+          echo "- $line"
+        done
+
+        echo ""
+        if [[ "${{ steps.detect.outputs.any_changed }}" == "true" ]]; then
+          echo "🔧 Relevant files changed:"
+          for file in ${{ steps.detect.outputs.all_changed_files }}; do
+            echo "- $file"
+          done
+        else
+          echo "✅ No relevant files changed"
+        fi
