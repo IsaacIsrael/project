@@ -1,0 +1,18 @@
+name: Pull Request Checks
+
+on: pull_request
+
+jobs:
+  lint:
+    name: '💅 Lint check'
+    uses: ./.github/workflows/$lint.yaml
+
+  test:
+    name: '🧪 Test check'
+    uses: ./.github/workflows/$test-coverage.yaml
+    secrets: inherit
+
+  deploy-chromatic:
+    name: '🚥 Chromatic Publish'
+    uses: ./.github/workflows/$deploy-chormatic.yaml
+    secrets: inherit
