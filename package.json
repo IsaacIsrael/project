@@ -6,7 +6,7 @@
     "prestart": "npm run clear:watchman",
     "start": "ENV=local npm run react-native",
     "pretest": "npm run clear:watchman",
-    "test": "is-ci-cli \"test:coverage\" \"test:watch\"",
+    "test": "npm run test:watch",
     "test:watch": "npm run jest:watch",
     "test:coverage": "npm run jest:coverage --",
     "test:e2e:ios": "APP_PATH=$(npm run maestro:ios:build  | tee /dev/stderr | tail -n 1) && npm run maestro:ios -- -a \"$APP_PATH\"",
