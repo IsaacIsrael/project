@@ -1,0 +1,52 @@
+[
+  {
+    "key": "unit",
+    "title": "🧩 Unit Coverage",
+    "command_title": " 🧩 Run Unit Tests",
+    "command": "npm run jest:coverage -- --selectProjects=unit",
+    "files": [
+      "src/duckers/**/*.{ts,tsx,js,jsx}",
+      "src/helpers/**/*.{ts,tsx,js,jsx}",
+      "src/store/**/*.{ts,tsx,js,jsx}",
+      "src/constants/**/*.{ts,tsx,js,jsx}",
+      "src/services/**/*.{ts,tsx,js,jsx}",
+      "test/**/*.{ts,tsx,js,jsx}",
+      ".github/**/*",
+      "jest.config.js",
+      ".codecov.yml",
+      "package-lock.json"
+    ]
+  },
+  {
+    "key": "integration",
+    "title": "🔗 Integration Coverage",
+    "command_title": "🔗 Run Integration Tests",
+    "command": "npm run jest:coverage -- --selectProjects=integration",
+    "files": [
+      "src/**/*.{ts,tsx,js,jsx}",
+      "test/**/*.{ts,tsx,js,jsx}",
+      ".github/**/*",
+      "jest.config.js",
+      ".codecov.yml",
+      "package-lock.json"
+    ]
+  },
+  {
+    "key": "component",
+    "title": "🎭 Component Coverage",
+    "command_title": "🎭 Run Component Tests",
+    "command": "npm run storybook:web:test:coverage",
+    "files": [
+      "src/components/**/*.{ts,tsx,js,jsx}",
+      "src/helpers/**/*.{ts,tsx,js,jsx}",
+      "src/constants/**/*.{ts,tsx,js,jsx}",
+      "src/styles/**/*.{ts,tsx,js,jsx}",
+      ".github/**/*",
+      "chromatic.config.json",
+      ".codecov.yml",
+      "package-lock.json"
+    ],
+    "setup-docs": true,
+    "setup-playwright": true
+  }
+]
