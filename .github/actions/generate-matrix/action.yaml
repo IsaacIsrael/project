@@ -1,0 +1,41 @@
+name: 'Generate Filtered Matrix from JSON Array'
+description: 'Filters matrix entries (array of objects) based on "key" and returns a wrapped matrix.'
+
+inputs:
+  matrix_file_path:
+    description: 'Path to the JSON file containing an array of matrix entries'
+    required: true
+
+  skip_keys:
+    description: 'Comma-separated list of keys to exclude (e.g. eslint,prettier)'
+    required: false
+    default: ''
+
+outputs:
+  matrix:
+    description: 'Final filtered matrix object (with "include" key)'
+    value: ${{ steps.set.outputs.matrix }}
+
+runs:
+  using: 'composite'
+  steps:
+    - id: set
+      shell: bash
+      run: |
+        echo "📥 Reading matrix array from: '${{ inputs.matrix_file_path }}'"
+        echo "🙈 Keys to skip: '${{ inputs.skip_keys }}'"
+
+        RAW=$(cat "${{ inputs.matrix_file_path }}")
+
+        FILTERED=$(echo "$RAW" | jq --arg skip "${{ inputs.skip_keys }}" '
+          map(
+            select(.key as $key | ($skip | split(",") | map(gsub("^\\s+|\\s+$"; "")) | index($key) | not))
+          )
+        ')
+
+        WRAPPED=$(jq -n --argjson list "$FILTERED" '{ include: $list }')
+
+        echo "✅ Final matrix:"
+        echo "$WRAPPED" | jq
+
+        echo "matrix=$(echo "$WRAPPED" | jq -c '.')" >> "$GITHUB_OUTPUT"
