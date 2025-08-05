@@ -25,10 +25,10 @@ jobs:
         id: detect-changed
         with:
           files: |
-            src/components/**/*.+(ts|tsx|js|jsx)
-            src/helpers/**/*.+(ts|tsx|js|jsx)
-            src/constants/**/*.+(ts|tsx|js|jsx)
-            src/styles/**/*.+(ts|tsx|js|jsx)
+            src/components/**/*.{ts,tsx,js,jsx}
+            src/helpers/**/*.{ts,tsx,js,jsx}
+            src/constants/**/*.{ts,tsx,js,jsx}
+            src/styles/**/*.{ts,tsx,js,jsx}
             .github/**/*
             chromatic.config.json
 
