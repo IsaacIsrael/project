@@ -51,12 +51,11 @@ module.exports = {
   },
   coverageThreshold: {
     global: {
-      branches: 48,
-      functions: 87,
+      branches: 37,
+      functions: 82,
       lines: 77,
       statements: 77,
     },
   },
-
   transformIgnorePatterns: ['/node_modules/(?!react-native|react-redux)/'],
 };

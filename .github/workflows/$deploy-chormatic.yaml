@@ -1,0 +1,43 @@
+name: 🚥 Publish Chromatic
+
+on:
+  workflow_dispatch:
+  workflow_call:
+
+jobs:
+  chromatic:
+    name: '🚀 Publish to Chromatic'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.ref || github.ref }}
+        env:
+          CHROMATIC_BRANCH: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.ref || github.ref_name }}
+          CHROMATIC_SHA: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
+          CHROMATIC_SLUG: ${{ github.repository }}
+
+      - name: 🔎 Detect changes
+        uses: ./.github/actions/detect-changed/
+        id: detect-changed
+        with:
+          files: |
+            src/components/**/*.{ts,tsx,js,jsx}
+            src/helpers/**/*.{ts,tsx,js,jsx}
+            src/constants/**/*.{ts,tsx,js,jsx}
+            src/styles/**/*.{ts,tsx,js,jsx}
+            .github/**/*
+            chromatic.config.json
+
+      - name: ⚙️ Project Setup
+        if: steps.detect-changed.outputs.any_changed == 'true'
+        uses: ./.github/actions/setup/
+
+      - name: 🚀 Publish to Chromatic
+        if: steps.detect-changed.outputs.any_changed == 'true'
+        uses: chromaui/action@latest
+        with:
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}

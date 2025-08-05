@@ -1,0 +1,42 @@
+name: 'Upload to Codecov'
+description: 'Uploads coverage report and test results to Codecov.'
+
+inputs:
+  token:
+    description: 'Codecov authentication token'
+    required: true
+  flags:
+    description: 'Codecov flags (e.g. module or suite name)'
+    required: false
+  coverage_file:
+    description: 'Path to the lcov coverage file'
+    required: false
+    default: './coverage/lcov.info'
+  report_file:
+    description: 'Path to the test results report file'
+    required: false
+    default: './coverage/junit.xml'
+  fail_ci_if_error:
+    description: 'Whether to fail CI if upload errors occur'
+    required: false
+    default: 'true'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: 📊 Upload coverage to Codecov
+      uses: codecov/codecov-action@v5
+      with:
+        token: ${{ inputs.token }}
+        flags: ${{ inputs.flags }}
+        files: ${{ inputs.coverage_file }}
+        fail_ci_if_error: ${{ inputs.fail_ci_if_error }}
+
+    - name: 📈 Upload test results to Codecov
+      if: ${{ !cancelled() }}
+      uses: codecov/test-results-action@v1
+      with:
+        token: ${{ inputs.token }}
+        flags: ${{ inputs.flags }}
+        files: ${{ inputs.report_file }}
+        fail_ci_if_error: ${{ inputs.fail_ci_if_error }}

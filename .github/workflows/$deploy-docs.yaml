@@ -1,0 +1,68 @@
+name: 📝 Publish Documentation
+
+on:
+  workflow_dispatch:
+  workflow_call:
+
+jobs:
+  build:
+    name: 🚧 Build Docusaurus
+    runs-on: ubuntu-latest
+    outputs:
+      any_changed: ${{ steps.detect-changed.outputs.any_changed }}
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 🔎 Detect changes
+        id: detect-changed
+        uses: ./.github/actions/detect-changed
+        with:
+          files: |
+            **/src/**
+            README.md
+            docs/**/*
+            ./.github/**/*
+            .github/workflows/**/*
+
+      - name: ⚙️ Project Setup
+        if: steps.detect-changed.outputs.any_changed == 'true'
+        uses: ./.github/actions/setup
+        with:
+          docs: true
+
+      - name: 🏷️ Add version info
+        if: steps.detect-changed.outputs.any_changed == 'true'
+        run: |
+          echo "DEPLOY_DATE=$(date +'%Y-%m-%d %H:%M:%S')" >> $GITHUB_ENV
+          echo "const deployInfo = {date:'${{ env.DEPLOY_DATE }}', commit:'${{ github.sha }}'};" > docs/src/deploy-info.js
+
+      - name: 📚 Build docs
+        if: steps.detect-changed.outputs.any_changed == 'true'
+        run: npm run docs:build
+
+      - name: 📦 Upload build artifact
+        if: steps.detect-changed.outputs.any_changed == 'true'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs/build
+
+  deploy:
+    name: 🚀 Deploy to GitHub Pages
+    needs: build
+    if: needs.build.outputs.any_changed == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write # to deploy to Pages
+      id-token: write # to verify the deployment originates from an appropriate source
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

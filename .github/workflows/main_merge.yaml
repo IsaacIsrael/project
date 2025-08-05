@@ -1,0 +1,22 @@
+name: Main merge actions
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  doc:
+    name: '📝 Documentation Release'
+    uses: ./.github/workflows/$deploy-docs.yaml
+    secrets: inherit
+
+  test:
+    name: '🧪 Test Coverage Release'
+    uses: ./.github/workflows/$test-coverage.yaml
+    secrets: inherit
+
+  deploy-chromatic:
+    name: '🚥 Chromatic Release'
+    uses: ./.github/workflows/$deploy-chormatic.yaml
+    secrets: inherit
