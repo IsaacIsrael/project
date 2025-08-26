@@ -1,1 +1,30 @@
+# Hook params
+MSG_FILE="$1"  # .git/COMMIT_EDITMSG
+SOURCE="$2"    # message|template|merge|squash|commit|"" (empty during rebase/cherry-pick)
+SHA="$3"
+
+# 0) Do not try to open CZ if no TTY (e.g. in CI)
+if [ ! -t 1 ]; then
+  exit 0
+fi
+
+# 1) Skip when in rebase/cherry-pick (SOURCE may be empty)
+if [ -d ".git/rebase-merge" ] || [ -d ".git/rebase-apply" ]; then
+  exit 0
+fi
+
+# 2) Cases where we DO NOT run Commitizen:
+# - SOURCE=message → user already passed -m/-F
+# - SOURCE=merge/squash → auto-generated Git messages
+# - SOURCE=commit → happens on --amend/-C/-c; by default skip unless CZ_ON_AMEND=1
+if [ "$SOURCE" = "message" ] || [ "$SOURCE" = "merge" ] || [ "$SOURCE" = "squash" ]; then
+  exit 0
+fi
+if [ "$SOURCE" = "commit" ] && [ "$CZ_ON_AMEND" != "1" ]; then
+  exit 0
+fi
+
+# 3) Open Commitizen in hook mode, writing into the commit message file
+# Attach TTY back (needed on some shells)
+# Pass both GIT_PARAMS and HUSKY_GIT_PARAMS for compatibility
 exec < /dev/tty && cz --hook || true

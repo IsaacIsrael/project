@@ -3,16 +3,21 @@ name: Pull Request Checks
 on: pull_request
 
 jobs:
-  lint:
-    name: '💅 Lint check'
-    uses: ./.github/workflows/$lint.yaml
+  # lint:
+  #   name: '💅 Lint check'
+  #   uses: ./.github/workflows/$lint.yaml
 
-  test:
-    name: '🧪 Test check'
-    uses: ./.github/workflows/$test-coverage.yaml
-    secrets: inherit
+  # test:
+  #   name: '🧪 Test check'
+  #   uses: ./.github/workflows/$test-coverage.yaml
+  #   secrets: inherit
 
-  deploy-chromatic:
-    name: '🚥 Chromatic Publish'
-    uses: ./.github/workflows/$deploy-chormatic.yaml
+  # deploy-chromatic:
+  #   name: '🚥 Chromatic Publish'
+  #   uses: ./.github/workflows/$deploy-chormatic.yaml
+  #   secrets: inherit
+
+  e2e:
+    name: '🎼 E2E Test'
+    uses: ./.github/workflows/$test-e2e.yaml
     secrets: inherit

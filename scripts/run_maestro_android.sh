@@ -46,7 +46,7 @@ adb -s "$DEVICE_ID" install -r "$APP_PATH"
 
 # # Run Maestro test
 echo "▶️ Running Maestro test on '$FLOW_PATH' using device '$AVD_NAME'"
-maestro --device "$DEVICE_ID" test "$FLOW_PATH"
+maestro --device "$DEVICE_ID" test "$FLOW_PATH" --format=junit --output=report.xml --no-ansi .maestro
 
 echo "🛑 Shutting down simulator..."
 adb -s "$DEVICE_ID" emu kill

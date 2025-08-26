@@ -53,6 +53,8 @@ jobs:
         with:
           docs: ${{ matrix.setup-docs }}
           playwright: ${{ matrix.setup-playwright }}
+          pod: ${{ matrix.setup-pod }}
+          ruby: ${{ matrix.setup-ruby }}
 
       - name: ${{ matrix.command_title }}
         if: steps.detect-changed.outputs.any_changed == 'true'
