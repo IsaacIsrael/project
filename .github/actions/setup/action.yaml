@@ -8,6 +8,12 @@ inputs:
   playwright:
     description: Whether to install playwright
     default: 'false'
+  ruby:
+    description: Whether to set up Ruby environment
+    default: 'false'
+  pod:
+    description: Whether to install CocoaPods dependencies
+    default: 'false'
   cache-name:
     description: Custom suffix to isolate cache (lint, test)
     default: 'default'
@@ -29,9 +35,33 @@ runs:
         node-version: 'lts/hydrogen'
         cache: 'npm'
 
+    - name: Set up Ruby environment
+      if: ${{ (inputs.pod == 'true') || (inputs.ruby == 'true') }}
+      uses: ruby/setup-ruby@v1
+      with:
+        bundler-cache: true
+        ruby-version: '2.7.6'
+
+    - name: Cache Node Modules
+      uses: actions/cache@v4
+      with:
+        path: node_modules
+        key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-
+
     - name: Install project dependencies
       run: npm ci
       shell: bash
+
+    - name: Cache Docs Node Modules
+      if: ${{ inputs.docs == 'true' }}
+      uses: actions/cache@v4
+      with:
+        path: docs/node_modules
+        key: ${{ runner.os }}-node-docs-${{ hashFiles('docs/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-docs-
 
     - name: Install docs dependencies
       if: ${{ inputs.docs == 'true' }}
@@ -41,4 +71,19 @@ runs:
     - name: Install Playwright
       if: ${{ inputs.playwright == 'true' }}
       run: npx playwright install --with-deps
+      shell: bash
+
+    - name: Cache CocoaPods
+      if: ${{ inputs.pod == 'true' }}
+      uses: actions/cache@v4
+      with:
+        path: ios/Pods
+        key: ${{ runner.os }}-pods-${{ hashFiles('ios/Podfile.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-pods-
+
+    - name: Install CocoaPods dependencies
+      if: ${{ inputs.pod == 'true' }}
+      run: |
+        cd ios && pod install --deployment && cd ..
       shell: bash

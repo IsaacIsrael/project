@@ -1,0 +1,23 @@
+[
+  {
+    "key": "ios",
+    "title": "🍎 E2E Ios test",
+    "command_title": "🎼 Run Maestro Tests",
+    "command": "npm run test:e2e:ios",
+    "files": ["e2e/**/*.{ts,tsx,js,jsx}", "src/**/*.{ts,tsx,js,jsx}", "ios/**/*", ".github/**/*", "package-lock.json"],
+    "setup-pod": true
+  },
+  {
+    "key": "android",
+    "title": "🤖 E2E Android test",
+    "command_title": "🎼 Run Maestro Tests",
+    "command": "npm run test:e2e:android",
+    "files": [
+      "e2e/**/*.{ts,tsx,js,jsx}",
+      "src/**/*.{ts,tsx,js,jsx}",
+      "android/**/*",
+      ".github/**/*",
+      "package-lock.json"
+    ]
+  }
+]

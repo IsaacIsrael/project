@@ -33,7 +33,7 @@ jobs:
         with:
           docs: true
 
-      - name: 🏷️ Add version info
+      - name: 🏷️ Add version info.
         if: steps.detect-changed.outputs.any_changed == 'true'
         run: |
           echo "DEPLOY_DATE=$(date +'%Y-%m-%d %H:%M:%S')" >> $GITHUB_ENV
